@@ -13,6 +13,6 @@ const productSchema = new Schema({
   instock: { type: Boolean, default: true, required: true },
 });
 
-const productModel = model("product", productSchema);
+const productModel = model("cw", productSchema);
 
 module.exports = productModel;
