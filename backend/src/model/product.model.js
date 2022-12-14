@@ -11,8 +11,9 @@ const productSchema = new Schema({
   ancestor: { type: [String], required: true },
   brand: { type: String, required: false },
   instock: { type: Boolean, default: true, required: true },
+  quantity : {type :Number ,default : 15}
 });
 
-const productModel = model("cw", productSchema);
+const productModel = model("product", productSchema);
 
 module.exports = productModel;
