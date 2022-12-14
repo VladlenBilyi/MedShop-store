@@ -1,6 +1,8 @@
 const express = require("express");
 const CartRoute = express.Router();
 const cors = require("cors");
+const cartModel = require("../model/cart.model");
+const productModel = require("../model/product.model");
 const checkToken = require("../middlewares/user.middleware");
 const cartModel = require("../model/cart.model");
 CartRoute.use(cors());
