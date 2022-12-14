@@ -150,12 +150,13 @@ UserRoute.post("/signin", async (req, res) => {
       if (await argon2.verify(user[0].password, req.body.password)) {
         const access_token = jwt.sign(
           {
+            id : user[0]._id,
             username: user[0].username,
             userType: user[0].userType,
           },
           process.env.SECRET_KEY,
           {
-            expiresIn: "5s",
+            expiresIn: "1d",
           }
         );
         const refresh_token = jwt.sign(
@@ -173,8 +174,7 @@ UserRoute.post("/signin", async (req, res) => {
           AccessToken: access_token,
           RefreshToken: refresh_token,
           username: user[0].username,
-          userType: user[0].userType,
-          id: user[0]._id,
+          userType: user[0].userType
         });
       } else {
         res.status(403).json({
@@ -213,6 +213,7 @@ UserRoute.post("/signin/verification", async (req, res) => {
       if (!access_verification) {
         const newToken = jwt.sign(
           {
+            id : refresh_verification._id,
             username: refresh_verification.username,
             userType: refresh_verification.userType,
           },
@@ -232,6 +233,7 @@ UserRoute.post("/signin/verification", async (req, res) => {
     } catch (error) {
       const newToken = jwt.sign(
         {
+          id : refresh_verification._id,
           username: refresh_verification.username,
           userType: refresh_verification.userType,
         },

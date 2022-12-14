@@ -2,15 +2,9 @@ const express = require("express");
 const CartRoute = express.Router();
 const cors = require("cors");
 const cartModel = require("../model/cart.model");
-const productModel = require("../model/product.model");
 const checkToken = require("../middlewares/user.middleware");
-const cartModel = require("../model/cart.model");
 CartRoute.use(cors());
 CartRoute.use(checkToken);
-
-CartRoute.get("/", async (req, res) => {
-  res.send("welcome to CartRoute");
-});
 
 // Post Request
 CartRoute.post("/items", async (req, res) => {
@@ -33,9 +27,9 @@ CartRoute.post("/items", async (req, res) => {
 });
 
 // Get Request
-CartRoute.get("/items", async (req, res) => {
+CartRoute.get("/", async (req, res) => {
   try {
-    const cartItems = await cartItems.find();
+    const cartItems = await cartModel.find();
     if (cartItems) {
       res.status(200).json({
         cartItems: cartItems,
@@ -53,10 +47,11 @@ CartRoute.get("/items", async (req, res) => {
 });
 
 // Get Cart Items from user ID
-CartRoute.get("/items/:id", async (req, res) => {
+CartRoute.get("/items", async (req, res) => {
   try {
+    console.log(req.body.id);
     const cartItems = await cartModel
-      .find({ userID: req.params.id })
+      .find({ userID: req.body.id })
       .populate(["productID"]);
     if (cartItems) {
       res.status(200).json({

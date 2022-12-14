@@ -5,6 +5,7 @@ module.exports = (req,res,next)=>{
         const token = req.headers["access_token"];
         const check = jwt.verify(token,process.env.SECRET_KEY);
         if(check){
+            req.body.id = check.id
             next();
         }
         else{
