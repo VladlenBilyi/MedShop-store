@@ -6,14 +6,14 @@ import { CgProfile } from 'react-icons/cg';
 import { BsCartFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import Navbardrawer from './Navbar_drawer';
-
+import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
-
+    const navigate=useNavigate();
     return (
 
         <Box w={"100vw"} h={"9rem"} backgroundColor={"#10847e"} pl={"20"}  pos='sticky'  zIndex={"10"} >
             <Flex gap={"6rem"} className="nav1" >
-                <Box boxSize='90px' mt={"4"}>
+                <Box onClick={()=>navigate("/")} cursor="pointer" boxSize='90px' mt={"4"}>
                     <Image src='https://i.ibb.co/s5mNPnz/1.png' alt='logo' borderRadius={"50%"} />
                 </Box>
 
