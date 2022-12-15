@@ -1,9 +1,11 @@
+const transporter = require("../config/mail");
 const cartModel = require("../model/cart.model");
 const orderModel = require("../model/order.model");
+const productModel = require("../model/product.model");
 
 const getOrder = async()=>{
     try{
-        let data = await  orderModel.find().populate(['userId','productId'])
+        let data = await  orderModel.find().populate(['userID','orderData.productID'])
 
         if(data.length == 0){
             return {
@@ -29,7 +31,7 @@ const getOrder = async()=>{
 
 const getSingleOrder = async(id)=>{
     try{
-        let data = await  orderModel.find({id}).populate(['userId','productId'])
+        let data = await  orderModel.find({id}).populate(['userID','productID'])
 
         if(!data){
             return {
@@ -197,25 +199,42 @@ const deliverSuccess = async(id)=>{
 
 
 
-const createOrder = async({userId,location , payment,paymentType})=>{
-
+const createOrder = async(userID,location , payment,paymentType)=>{
     try{
-    let findData = await cartModel.find({userId:userId},{_id : 0})
-    console.log(findData)
+    let findData = await cartModel.find({userID:userID},{_id : 0 , __v : 0}).populate(['userID','productID'])
         if(findData.length > 0){
-          let orderData = await orderModel.create({
-               data:findData,
+            let totalBill = 0;
+            for(let i=0;i<findData.length;i++){
+                totalBill += findData[i].quantity * findData[i].productID.mrp
+                await productModel.updateOne({id:findData[i].productID.id},{$set :{quantity:findData[i].productID.quantity - findData[i].quantity}})
+            }
+          let orderDatalist = await orderModel.create({
+               userID,
                payment,
                location,
-               paymentType
-          })
-            if(!orderData){
+               paymentType,
+               orderData:findData
+            })
+
+            if(!orderDatalist){
+
                 return {
                     status:false,
                     massage : 'something went wrong please try again later !'
                 }
             }
             else{
+                await cartModel.deleteMany({userID:userID})
+                transporter.sendMail({
+                    to:findData[0].userID.email,
+                    from:'medshoppe5@gmail.com',
+                    subject:'order submitted',
+                    html : `<h4>Hello ${findData[0].userID.username}</h4><br /><br /><p>Your order from MedShoppe has been submited successfull</p><br /><br />
+                            <p>Total bill : ${totalBill}</p> <br />
+                            <p>OrderId : ${orderDatalist._id} </p><br /><br />
+                            <p>Thanks for choosing us </p>
+                             `
+                })
                 return {
                     status:true,
                     massage : 'order submitted successfully',
@@ -240,9 +259,9 @@ const createOrder = async({userId,location , payment,paymentType})=>{
 }
 
 
-const getOrderDataForUser = async(userId)=>{
+const getOrderDataForUser = async(userID)=>{
     try{
-        let data = await  orderModel.find({userId}).populate('productId')
+        let data = await  orderModel.find({userID}).populate('productID')
         if(!data){
             return {
                 status:false,
