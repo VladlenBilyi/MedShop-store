@@ -12,7 +12,7 @@ CartRoute.post("/items", async (req, res) => {
     const allCartItems = await cartModel.find({
       userID: req.body.id,
       productID: req.body.productID,
-    }).populate({path : "productID"});
+    }).populate("productID");
     if (allCartItems.length >= 1 ) {
       const UpdatedCart = await cartModel.findByIdAndUpdate(
         allCartItems[0]._id,
@@ -22,7 +22,7 @@ CartRoute.post("/items", async (req, res) => {
         newItem_added: UpdatedCart,
       });
     } else {
-      const cartItems = await cartModel.create(req.body);
+      const cartItems = await cartModel.create({userID:req.body.id,productID:req.body.productID});
       if (cartItems) {
         res.status(201).json({
           newItem_added: cartItems,

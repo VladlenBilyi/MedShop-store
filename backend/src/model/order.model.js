@@ -19,9 +19,9 @@ const orderSchema = new Schema({
    packed : {type :Boolean , default : false} ,
    shipped: {type :Boolean , default : false} ,
    delivered : {type :Boolean , default : false} ,
-   payment : {type :Number} ,
+   totalBill : {type :Number} ,
    paymentType : {type :String},
-   location:{type : Object , required:true}
+   userDetails:{type : Object , required:true}
 
 });
 

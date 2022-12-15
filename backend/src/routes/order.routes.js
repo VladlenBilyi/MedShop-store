@@ -18,7 +18,7 @@ OrderRoute.delete('/cancel/:id',orderTokenCheck,async(req,res)=>{
     res.send(ans)
 })
 
-OrderRoute.patch('/shipped/:id',orderTokenCheck,async(req,res)=>{
+OrderRoute.patch('/shipped/:id',async(req,res)=>{
     let ans = await shippingSuccess(req.params.id);
     res.send(ans)
 })
@@ -39,8 +39,8 @@ OrderRoute.get('/:id',orderTokenCheck ,async(req,res)=>{
 })
 
 OrderRoute.post('/create',checkToken,async(req,res)=>{
-    const {id,location , payment,paymentType} = req.body
-    let ans = await createOrder(id,location , payment,paymentType);
+    const {id,details,totalBill,paymentType} = req.body
+    let ans = await createOrder(id,totalBill,details,paymentType);
     res.send(ans)
 })
 
