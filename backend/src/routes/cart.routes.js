@@ -9,19 +9,33 @@ CartRoute.use(checkToken);
 // Post Request
 CartRoute.post("/items", async (req, res) => {
   try {
-    const cartItems = await cartModel.create(req.body);
-    if (cartItems) {
-      res.status(201).json({
-        newItem_added: cartItems,
+    const allCartItems = await cartModel.find({
+      userID: req.body.id,
+      productID: req.body.productID,
+    }).populate({path : "productID"});
+    if (allCartItems.length >= 1 ) {
+      const UpdatedCart = await cartModel.findByIdAndUpdate(
+        allCartItems[0]._id,
+        { quantity: allCartItems[0].quantity + 1 }
+      );
+      res.status(200).json({
+        newItem_added: UpdatedCart,
       });
     } else {
-      res.status(404).json({
-        message: "Error in request",
-      });
+      const cartItems = await cartModel.create(req.body);
+      if (cartItems) {
+        res.status(201).json({
+          newItem_added: cartItems,
+        });
+      } else {
+        res.status(404).json({
+          message: "Error in request",
+        });
+      }
     }
   } catch (error) {
     res.status(404).json({
-      message: "Error in request",
+      message: error,
     });
   }
 });
@@ -46,16 +60,46 @@ CartRoute.get("/", async (req, res) => {
   }
 });
 
+CartRoute.put("/items",async(req,res)=>{
+  try {
+    const allCartItems = await cartModel.find({
+      userID: req.body.id,
+      productID: req.body.productID,
+    });
+    if (allCartItems.length >= 1) {
+      const UpdatedCart = await cartModel.findByIdAndUpdate(
+        allCartItems[0]._id,
+        { quantity: allCartItems[0].quantity - 1 }
+      );
+      res.status(200).json({
+        newItem_added: UpdatedCart
+      });
+    } else {
+      res.status(404).json({
+        message: "This product not exists"
+      })
+    }
+  } catch (error) {
+    res.status(404).json({
+      message: error,
+    });
+  }
+})
+
 // Get Cart Items from user ID
 CartRoute.get("/items", async (req, res) => {
   try {
-    console.log(req.body.id);
     const cartItems = await cartModel
       .find({ userID: req.body.id })
-      .populate(["productID"]);
-    if (cartItems) {
+      .populate({ path: "productID" });
+    if (cartItems.length >= 1) {
+      let total = 0;
+      for (var i = 0; i < cartItems.length; i++) {
+        total += cartItems[i].productID.mrp * cartItems[i].quantity;
+      }
       res.status(200).json({
         cartItems: cartItems,
+        totalPayment: total,
       });
     } else {
       res.status(404).json({
