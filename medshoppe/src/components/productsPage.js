@@ -47,12 +47,12 @@ export const Productspage = () => {
                 <Box w="100%">
                     <Flex  gap="100px">
                         <Text fontWeight="bold" color="rgb(79, 88, 94)" fontSize="30px" fontFamily="sans-serif">Mega Clearance Sale</Text>
-                        <Flex alignItems="center">
+                        <Flex  alignItems="center">
                             <Text textAlign="center" w="100px">Sort By:</Text>
-                            <Select border="2px" w="200px" placeholder="Popularity">
-                                <option value="DESC">Relevance</option>
+                            <Select border="2px" w="200px" >
+                               
                                 <option value="ASC">Price low to high</option>
-                                <option value="">Price high to low</option>
+                                <option value="DSC">Price high to low</option>
                             </Select>
                         </Flex>
 
