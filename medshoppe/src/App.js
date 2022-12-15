@@ -1,17 +1,12 @@
-import { Box, Flex, Image} from '@chakra-ui/react'
-import './App.css';
-import HealthcarePage from './Pages/Healthcare/HealthcarePage';
-import OrderMedicinesPage from './Pages/OrderMedicines/OrderMedicinesPage';
+import React from "react";
+import Advanced from './Components/Checkout/Advanced';
+import Payment from './Components/Payment/Payment'
 
-function App() {
+export default function App() {
   return (
-    <Box>
-     {/* <HealthcarePage/> */}
-     <OrderMedicinesPage/>
-    </Box>
+    <>
+    <Payment/>
+    </>
+    
   );
 }
-
-export default App;
-
-
