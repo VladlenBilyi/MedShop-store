@@ -10,11 +10,11 @@
     margin-bottom: 10%;
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item{
     height: 100%;
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:first-child{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:first-child{
     width: 100%;
     margin-bottom: 4%;
     height: 180px;
@@ -28,28 +28,28 @@
     align-items: center;
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item  div:first-child:hover{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item  div:first-child:hover{
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     cursor: pointer;
 }
 
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item  div:first-child img{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item  div:first-child img{
     width: 60%;
     height: 130px;
     margin: auto;
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item{
     display: grid;
     grid-template-columns: repeat(1,1fr);
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item:hover{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item:hover{
     cursor: pointer;
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:first-child{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:first-child{
     font-size: 100%;
     font-weight: 500;
     text-align: left;
@@ -57,7 +57,7 @@
     margin-bottom: 3px;
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:nth-child(2){
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:nth-child(2){
     font-size: 90%;
     font-weight: bold;
     text-align: left;
@@ -66,21 +66,21 @@
     margin: 0%;
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:nth-child(2) > span{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:nth-child(2) > span{
     font-size: 90%;
     text-align: left;
     text-decoration: line-through;
     margin-left: 2%;
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:last-child{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:last-child{
     font-size: 90%;
     color: rgb(53, 52, 52);
     font-weight: bold;
     text-align: left;
 }
 
-.Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:last-child > span{
+.Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:last-child > span{
     font-size: 90%;
     color: rgb(210, 11, 11);
     text-align: left;
@@ -92,20 +92,20 @@
         margin-bottom: 10%;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:nth-child(2),
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:last-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:nth-child(2),
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:last-child{
         font-size: 70%;
         padding: 0;
         margin: 0;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:first-child{
         font-size: 90%;
         padding-bottom: 1px;
         margin-bottom: 3px;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:first-child{
         height: 160px;
     }
 }
@@ -118,20 +118,20 @@
         margin-bottom: 10%;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:nth-child(2),
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:last-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:nth-child(2),
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:last-child{
         font-size: 70%;
         padding: 0;
         margin: 0;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:first-child{
         font-size: 90%;
         padding-bottom: 1px;
         margin-bottom: 3px;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:first-child{
         height: 160px;
     }
 }
@@ -147,26 +147,26 @@
         margin-bottom: 15%;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item  div:first-child img{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item  div:first-child img{
         width: 40%;
         height: 90px;
         margin: auto;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:nth-child(2),
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:last-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:nth-child(2),
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:last-child{
         font-size: 70%;
         padding: 0;
         margin: 0;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:first-child{
         font-size: 90%;
         padding-bottom: 1px;
         margin-bottom: 3px;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:first-child{
         height: 160px;
     }
 }
@@ -182,26 +182,26 @@
         margin-bottom: 20%;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item  div:first-child img{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item  div:first-child img{
         width: 30%;
         height: 80px;
         margin: auto;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:nth-child(2),
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:last-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:nth-child(2),
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:last-child{
         font-size: 70%;
         padding: 0;
         margin: 0;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:first-child{
         font-size: 90%;
         padding-bottom: 1px;
         margin-bottom: 3px;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:first-child{
         height: 130px;
     }
 }
@@ -217,26 +217,26 @@
         margin-bottom: 45%;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item  div:first-child img{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item  div:first-child img{
         width: 30%;
         height: 80px;
         margin: auto;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:nth-child(2),
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:last-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:nth-child(2),
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:last-child{
         font-size: 70%;
         padding: 0;
         margin: 0;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:first-child{
         font-size: 90%;
         padding-bottom: 1px;
         margin-bottom: 3px;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:first-child{
         height: 130px;
     }
 }
@@ -252,26 +252,26 @@
         margin-bottom: 80%;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item  div:first-child img{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item  div:first-child img{
         width: 30%;
         height: 80px;
         margin: auto;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:nth-child(2),
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:last-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:nth-child(2),
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:last-child{
         font-size: 70%;
         padding: 0;
         margin: 0;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:last-child > p:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:last-child > p:first-child{
         font-size: 90%;
         padding-bottom: 1px;
         margin-bottom: 3px;
     }
 
-    .Sahil_Second_Single_SinglePage_Element_grid .Lokesh_Second_Single_Car_Item div:first-child{
+    .Sahil_Second_Single_SinglePage_Element_grid .Sahil_Second_Single_Car_Item div:first-child{
         height: 130px;
     }
 }

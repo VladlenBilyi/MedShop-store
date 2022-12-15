@@ -21,10 +21,11 @@ import { CgProfile} from 'react-icons/cg';
 import {BsCartFill} from 'react-icons/bs';
 import { AiOutlineMenu } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function Navbardrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
-
+  const navigate=useNavigate();
   return (
     <>
       <Box _hover={{ cursor: 'pointer' }}>
@@ -34,6 +35,7 @@ function Navbardrawer() {
         isOpen={isOpen}
         placement='right'
         onClose={onClose}
+        size="full"
         finalFocusRef={btnRef}
 
       >
@@ -42,8 +44,7 @@ function Navbardrawer() {
           <DrawerCloseButton />
           <DrawerHeader>
             <Center>
-
-              <Box boxSize='90px' mt={"4"}>
+              <Box boxSize='90px' mt={"4"} onClick={()=>navigate("/")}>
                 <Image src='https://i.ibb.co/s5mNPnz/1.png' alt='logo' borderRadius={"50%"} />
               </Box>
             </Center>
