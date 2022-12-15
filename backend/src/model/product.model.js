@@ -7,11 +7,10 @@ const productSchema = new Schema({
   img3: { type: String, required: false },
   mrp: { type: Number, required: true },
   strike: { type: Number, required: false },
-  discount: { type: Number, required: false },
   ancestor: { type: [String], required: true },
   brand: { type: String, required: false },
   instock: { type: Boolean, default: true, required: true },
-  quantity : {type :Number ,default : 15}
+  quantity : {type :Number , default: 1}
 });
 
 const productModel = model("product", productSchema);
