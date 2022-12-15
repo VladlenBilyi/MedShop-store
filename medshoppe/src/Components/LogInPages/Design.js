@@ -9,6 +9,7 @@
  width: 900px;
  max-width: 100%;
  min-height: 600px;
+ margin: auto;
  `;
 
  export const SignUpContainer = styled.div`
