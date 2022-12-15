@@ -53,6 +53,7 @@ UserRoute.get("/signup/:id", async (req, res) => {
 });
 
 // Post Request
+
 UserRoute.post("/signup", async (req, res) => {
   const email_users = await userModel.find({
     email: req.body.email,
@@ -62,39 +63,31 @@ UserRoute.post("/signup", async (req, res) => {
       message: "EmailID already exists",
     });
   } else {
-    if (req.body.userType === "admin") {
-      try {
-        const token = req.headers["access_token"];
-        const access_verification = jwt.verify(token, process.env.SECRET_KEY);
-        if (access_verification.userType === "admin") {
-          try {
-            const hash = await argon2.hash(req.body.password);
-            const new_user = new userModel({
-              name: req.body.name,
-              username: req.body.username,
-              password: hash,
-              email: req.body.email,
-              userType: req.body.userType,
-            });
-            const created_users = await new_user.save();
+    const token = req.headers["access_token"];
+    if (token) {
+      const access_verification = jwt.verify(token, process.env.SECRET_KEY);
+      if (access_verification.userType === "admin") {
+        try {
+          const hash = await argon2.hash(req.body.password);
+          const new_user = new userModel({
+            name: req.body.name,
+            username: req.body.username,
+            password: hash,
+            email: req.body.email,
+            userType: "admin",
+          });
+          const created_users = await new_user.save();
 
-            res.status(201).json({
-              newUser: created_users,
-            });
-          } catch (error) {
-            res.status(404).json({
-              error: error,
-            });
-          }
-        } else {
-          res.status(403).json({
-            message: "Your token is invalid",
+          res.status(201).json({
+            newUser: created_users,
+          });
+        } catch (error) {
+          res.status(404).json({
+            error: error,
           });
         }
-      } catch (error) {
-        res.status(403).json({
-          message: "You are not allowed to create admin account",
-        });
+      } else {
+        res.status(403).send("You Don't have admin token");
       }
     } else {
       try {
@@ -104,7 +97,7 @@ UserRoute.post("/signup", async (req, res) => {
           username: req.body.username,
           password: hash,
           email: req.body.email,
-          userType: req.body.userType,
+          userType: "user",
         });
         const created_users = await new_user.save();
 
@@ -150,7 +143,7 @@ UserRoute.post("/signin", async (req, res) => {
       if (await argon2.verify(user[0].password, req.body.password)) {
         const access_token = jwt.sign(
           {
-            id : user[0]._id,
+            id: user[0]._id,
             username: user[0].username,
             userType: user[0].userType,
           },
@@ -174,7 +167,7 @@ UserRoute.post("/signin", async (req, res) => {
           AccessToken: access_token,
           RefreshToken: refresh_token,
           username: user[0].username,
-          userType: user[0].userType
+          userType: user[0].userType,
         });
       } else {
         res.status(403).json({
@@ -213,7 +206,7 @@ UserRoute.post("/signin/verification", async (req, res) => {
       if (!access_verification) {
         const newToken = jwt.sign(
           {
-            id : refresh_verification._id,
+            id: refresh_verification._id,
             username: refresh_verification.username,
             userType: refresh_verification.userType,
           },
@@ -233,7 +226,7 @@ UserRoute.post("/signin/verification", async (req, res) => {
     } catch (error) {
       const newToken = jwt.sign(
         {
-          id : refresh_verification._id,
+          id: refresh_verification._id,
           username: refresh_verification.username,
           userType: refresh_verification.userType,
         },

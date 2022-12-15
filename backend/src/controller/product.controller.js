@@ -172,7 +172,8 @@ const updateQuantity = async(id,val)=>{
     try{
         let isPresent = await productModel.findOne({id});
         if(isPresent.title){
-        let updateQuantityData = await productModel.updateOne({id},{$set:{"quantity":val}})
+        let updateQuantityData = await productModel.findByIdAndUpdate(isPresent._id,
+         { quantity: val }) 
         if(updateQuantityData.acknowledged){
         return {
                 status:true,

@@ -1,9 +1,11 @@
+const transporter = require("../config/mail");
 const cartModel = require("../model/cart.model");
 const orderModel = require("../model/order.model");
+const productModel = require("../model/product.model");
 
 const getOrder = async()=>{
     try{
-        let data = await  orderModel.find().populate(['userId','productId'])
+        let data = await  orderModel.find().populate(['userID','orderData.productID'])
 
         if(data.length == 0){
             return {
@@ -29,9 +31,9 @@ const getOrder = async()=>{
 
 const getSingleOrder = async(id)=>{
     try{
-        let data = await  orderModel.find({id}).populate(['userId','productId'])
+        let data = await  orderModel.find({id}).populate(['userID','productID'])
 
-        if(!data){
+        if(data.length == 0){
             return {
                 status:false,
                 massage : 'you dont have any order'
@@ -86,15 +88,14 @@ const deleteOrder = async(id)=>{
 const packingSuccess = async(id)=>{
     try{
 
-        let findData = await orderModel.findOne({id})
-        if(findData){
+        let findData = await orderModel.find({id})
+        if(findData.length > 0){
 
-            let updatedData = await orderModel.updateOne({id},{$set:{"packed":!findData.packing}});
-
-            if(updatedData.acknowledged){
+            let updatedData = await orderModel.findByIdAndUpdate(findData[0]._id,{ 'packed': !findData[0].packed }) 
+            if(updatedData.userID){
                 return {
                     status:true,
-                    massage : 'order packing successfully',
+                    massage : 'order packed changed successfully',
                 }
             }
             else{
@@ -123,15 +124,15 @@ const packingSuccess = async(id)=>{
 const shippingSuccess = async(id)=>{
     try{
 
-        let findData = await orderModel.findOne({id})
-        if(findData){
+        let findData = await orderModel.find({id})
+        if(findData.length > 0){
 
-            let updatedData = await orderModel.updateOne({id},{$set:{"shipped":!findData.shipped}});
-
-            if(updatedData.acknowledged){
+            let updatedData = await orderModel.findByIdAndUpdate(findData[0]._id,{ 'shipped': !findData[0].shipped }) 
+                 console.log(updatedData)
+            if(updatedData.userID){
                 return {
                     status:true,
-                    massage : 'order shipped successfully',
+                    massage : 'order shipped changed successfully',
                 }
             }
             else{
@@ -160,16 +161,14 @@ const shippingSuccess = async(id)=>{
 
 const deliverSuccess = async(id)=>{
     try{
+        let findData = await orderModel.find({id})
+        if(findData.length > 0){
 
-        let findData = await orderModel.findOne({id})
-        if(findData){
-
-            let updatedData = await orderModel.updateOne({id},{$set:{"delivered":!findData.delivered}});
-
-            if(updatedData.acknowledged){
+            let updatedData = await orderModel.findByIdAndUpdate(findData[0]._id,{ 'delivered': !findData[0].delivered }) 
+            if(updatedData.userID){
                 return {
                     status:true,
-                    massage : 'order delivered successfully',
+                    massage : 'order delivered changed successfully',
                 }
             }
             else{
@@ -197,25 +196,43 @@ const deliverSuccess = async(id)=>{
 
 
 
-const createOrder = async({userId,location , payment,paymentType})=>{
-
+const createOrder = async(userID,totalBill,details,paymentType)=>{
     try{
-    let findData = await cartModel.find({userId:userId},{_id : 0})
-    console.log(findData)
+    let findData = await cartModel.find({userID:userID},{_id : 0 , __v : 0}).populate(['userID','productID'])
         if(findData.length > 0){
-          let orderData = await orderModel.create({
-               data:findData,
-               payment,
-               location,
-               paymentType
-          })
-            if(!orderData){
+              let orderDatalist = await orderModel.create({
+                   userID,
+                   totalBill,
+                   paymentType,
+                   userDetails:details,
+                   orderData:findData
+                })
+
+            if(!orderDatalist.userID){
                 return {
                     status:false,
                     massage : 'something went wrong please try again later !'
                 }
             }
             else{
+                findData.forEach((ele)=>{
+                    totalBill += ele.quantity * ele.productID.mrp
+                    productModel.findByIdAndUpdate(
+                           ele.productID._id,
+                        { quantity: ele.productID.quantity - ele.quantity }
+                      )
+                   }) 
+                await cartModel.deleteMany({userID:userID})
+                transporter.sendMail({
+                    to:findData[0].userID.email,
+                    from:'medshoppe5@gmail.com',
+                    subject:'order submitted',
+                    html : `<h4>Hello ${findData[0].userID.username}</h4><br /><br /><p>Your order from MedShoppe has been submited successfull</p><br /><br />
+                            <p>Total bill : ${totalBill}</p> <br />
+                            <p>OrderId : ${orderDatalist._id} </p><br /><br />
+                            <p>Thanks for choosing us </p>
+                             `
+                })
                 return {
                     status:true,
                     massage : 'order submitted successfully',
@@ -240,9 +257,9 @@ const createOrder = async({userId,location , payment,paymentType})=>{
 }
 
 
-const getOrderDataForUser = async(userId)=>{
+const getOrderDataForUser = async(userID)=>{
     try{
-        let data = await  orderModel.find({userId}).populate('productId')
+        let data = await  orderModel.find({userID}).populate('productID')
         if(!data){
             return {
                 status:false,

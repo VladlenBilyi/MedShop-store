@@ -6,13 +6,14 @@ cartItemSchema = new mongoose.Schema({
         ref: "user",
         required: true
     },
-    productID: [{
+    productID: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "product",
         required: true
-    }]
+    },
+    quantity : {type:Number,default:1}
 },{
     versionKey:false,
     timestamps:true
 });
-module.exports = mongoose.model("cartItem", cartItemSchema);
+module.exports = mongoose.model("cart", cartItemSchema);
