@@ -7,5 +7,4 @@ const Homepage = () => {
     <Home/>
   )
 }
-
 export default Homepage
