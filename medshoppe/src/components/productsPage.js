@@ -1,6 +1,18 @@
 import { Box, Button, Checkbox, Divider, Flex, Grid, GridItem, Image, Input, InputGroup, InputRightElement, Select, Text } from "@chakra-ui/react"
+import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux"
+import { getProducts } from "../Store/products/products.action";
 export const Productspage = () => {
+    const {loading,data}=useSelector((store)=>store.products)
+    const [products,setProducts]=useState([])
+    const dispatch=useDispatch()
+    useEffect(()=>{
+        dispatch(getProducts()).then((res)=>
+         setProducts(res.data)
+        )
+    },[])
+    console.log(products)
     return (
         <>
             <Flex paddingLeft='100px' gap="50px" paddingRight="100px" paddingTop="40px" paddingBottom="40px" border="1px solid">
@@ -58,36 +70,16 @@ export const Productspage = () => {
 
                     </Flex>
                     <Grid marginTop="40px" templateColumns='repeat(3, 1fr)' gap={6}>
-                        <GridItem borderRadius="10px" alignItems="center"  padding="15px" border="1px solid gray" w='100%'>
-                            <Image   boxSize="200px" src="https://cdn01.pharmeasy.in/dam/products_otc/P65906/duckbill-shape-n95-mask-packet-of-2-2-1641788727.jpg"/>
-                            <Text >Duckbill Shape N95 Mask Packet Of 2</Text>
-                            <Text>MRP 500</Text>
-                        </GridItem>
-                        <GridItem borderRadius="10px" alignItems="center"  padding="15px" border="1px solid gray" w='100%'>
-                            <Image   boxSize="200px" src="https://cdn01.pharmeasy.in/dam/products_otc/P65906/duckbill-shape-n95-mask-packet-of-2-2-1641788727.jpg"/>
-                            <Text>Duckbill Shape N95 Mask Packet Of 2</Text>
-                            <Text>MRP 500</Text>
-                        </GridItem>
-                        <GridItem borderRadius="10px" alignItems="center"  padding="15px" border="1px solid gray" w='100%'>
-                            <Image   boxSize="200px" src="https://cdn01.pharmeasy.in/dam/products_otc/P65906/duckbill-shape-n95-mask-packet-of-2-2-1641788727.jpg"/>
-                            <Text>Duckbill Shape N95 Mask Packet Of 2</Text>
-                            <Text>MRP 500</Text>
-                        </GridItem>
-                        <GridItem borderRadius="10px" alignItems="center"  padding="15px" border="1px solid gray" w='100%'>
-                            <Image   boxSize="200px" src="https://cdn01.pharmeasy.in/dam/products_otc/P65906/duckbill-shape-n95-mask-packet-of-2-2-1641788727.jpg"/>
-                            <Text>Duckbill Shape N95 Mask Packet Of 2</Text>
-                            <Text>MRP 500</Text>
-                        </GridItem>
-                        <GridItem borderRadius="10px" alignItems="center"  padding="15px" border="1px solid gray" w='100%'>
-                            <Image   boxSize="200px" src="https://cdn01.pharmeasy.in/dam/products_otc/P65906/duckbill-shape-n95-mask-packet-of-2-2-1641788727.jpg"/>
-                            <Text>Duckbill Shape N95 Mask Packet Of 2</Text>
-                            <Text>MRP 500</Text>
-                        </GridItem>
-                        <GridItem borderRadius="10px" alignItems="center"  padding="15px" border="1px solid gray" w='100%'>
-                            <Image   boxSize="200px" src="https://cdn01.pharmeasy.in/dam/products_otc/P65906/duckbill-shape-n95-mask-packet-of-2-2-1641788727.jpg"/>
-                            <Text >Duckbill Shape N95 Mask Packet Of 2</Text>
-                            <Text>MRP 500</Text>
-                        </GridItem>
+                        {products.map((el)=>(
+                             <GridItem key={el._id} h="300px" borderRadius="10px" alignItems="center"  padding="15px" border="1px solid gray" w='100%'>
+                             <Image   boxSize="70%" src={el.img1}/>
+                             <Text textAlign="left" lineHeight="20px" fontWeight="bold" color="rgb(79, 88, 94)">{el.title}</Text>
+                             <Text textAlign="left">MRP {el.mrp}</Text>
+                         </GridItem>
+                        ))}
+                       
+                       
+                       
                        
                     </Grid>
 

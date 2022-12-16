@@ -1,22 +1,14 @@
-
-import React from "react";
-import Advanced from './Components/Checkout/Advanced';
-import Payment from './Components/Payment/Payment'
 import { Box, Flex, Image} from '@chakra-ui/react'
 import './App.css';
 
+import { AllRoutes } from './Routes/AllRoutes';
 
-export default function App() {
+function App() {
   return (
-
-    
-
-    <Box className="App">
-       hello
-
+    <Box >
+     
     </Box>
   );
 }
 
 export default App;
-

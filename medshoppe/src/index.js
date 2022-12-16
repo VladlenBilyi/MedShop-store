@@ -4,10 +4,13 @@ import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter,Route, Routes } from 'react-router-dom';
 import App from './App';
-import Advanced from './Components/Checkout/Advanced';
-import Payment from './Components/Payment/Payment'
-import Form from './Components/LogInPages/Form';
-import {Cart} from './Components/Cart/Cart';
+import { Provider } from 'react-redux';
+import { store } from './Store/store';
+import { ChakraProvider } from '@chakra-ui/react';
+// import Advanced from './Components/Checkout/Advanced';
+// import Payment from './Components/Payment/Payment'
+// import Form from './Components/LogInPages/Form';
+// import {Cart} from './Components/Cart/Cart';
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -15,14 +18,14 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/checkout" element={<Advanced />} />
-        <Route path="/card" element={<Payment />} />
-        <Route path="/login" element={<Form/>} />
-        <Route path="/cart" element={<Cart/>} />
-      </Routes>
+    <Provider store={store}>
+      <ChakraProvider>
+      <App/>
+      </ChakraProvider>
+   
+    </Provider>
     </BrowserRouter>
+ 
   </React.StrictMode>
 );
 
