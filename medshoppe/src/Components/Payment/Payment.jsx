@@ -1,6 +1,8 @@
 import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+import { GrSubtract } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 
 function Payment() {
@@ -31,7 +33,7 @@ function Payment() {
     }
   };
   // handleGetCart();
-  console.log(data,loading);
+  console.log(data, loading);
 
   const handlePutCart = async (product_id) => {
     try {
@@ -142,68 +144,179 @@ function Payment() {
   return (
     <>
       <Box
-      borderRadius={"15px"}
-      border={"0.5px solid teal"}
-      mt={"10px"}
-      position="absolute"
-      height="570px"
-      display={"inline-block"}
-      ml={"10px"}
-      width={"55%"}
+        borderRadius={"15px"}
+        mt={"10px"}
+        position="absolute"
+        height="600px"
+        display={"inline-block"}
+        ml={"10px"}
+        width={"55%"}
       >
         <Box display={"flex"} w={""} justifyContent="space-between">
-          <Heading ml="100px" mt="10px">Product Details</Heading>
-          <Text mt="15px" mr="100px">Price</Text>
-
+          <Heading
+            ml="100px"
+            mt="10px"
+            fontFamily={"Ubuntu, sans-serif"}
+            fontSize="26px"
+            color={"blackAlpha.500"}
+          >
+            {data.cartItems ? `Your Cart (${data.cartItems.length})` :`Your Cart (${0}))` }
+          </Heading>
+          <Text
+            mt="15px"
+            mr="118px"
+            fontFamily={"Ubuntu, sans-serif"}
+            color={"blackAlpha.700"}
+            fontSize="20px"
+          >
+            Price
+          </Text>
         </Box>
         <Flex
-         flexDirection={"column"}
-         height={"480px"}
-         mt={{ base: "-15px", lg: "auto" }}
-         overflow="scroll"
+          flexDirection={"column"}
+          height={"500px"}
+          mt={{ base: "-15px", lg: "auto" }}
+          overflow="scroll"
         >
-        {data.cartItems &&
-          data.cartItems.map((el, i) => (
-            <Box key={i}
-            justify="right"
-            alignItems="right"
-            height="auto"
-            w={{ base: "auto", lg: "auto" }}
-            mt={{ base: "20px", lg: "20px" }}
-            ml={{ base: "-480px", lg: "40px" }}
-            gap="2"
-           
-            >
-              <Text>{el.productID.title}</Text>
-              <Image h="80px" w={"80px"} src={el.productID.img1} />
-              <Text>MRP : {el.productID.mrp}</Text>
-              <Button onClick={() => handlePutCart(el.productID._id)}>-</Button>
-              <Text>Quantity {el.quantity}</Text>
-              <Button onClick={() => handlePostCart(el.productID._id)}>
-                +
-              </Button>
-              <Button onClick={() => handleDelete(el._id)}>
-                Delete This Product From Cart
-              </Button>
-            </Box>
-          ))}
+          {data.cartItems &&
+            data.cartItems.map((el, i) => (
+              <>
+                <Flex justifyContent={"space-between"}>
+                  <Box
+                    display={"flex"}
+                    flexDirection="column"
+                    key={i}
+                    justify="right"
+                    alignItems="right"
+                    height="auto"
+                    w={{ base: "auto", lg: "auto" }}
+                    mt={{ base: "20px", lg: "20px" }}
+                    ml={{ base: "-480px", lg: "40px" }}
+                    gap="2"
+                  >
+                    <Flex gap={5}>
+                      <Image className="imageFromPayment" h="180px" w={"180px"} src={el.productID.img1} />
+                      <Image className="imageFromPayment" h="180px" w={"180px"} src={el.productID.img2} />
+                    </Flex>
+                    <Box>
+                      <Text
+                        h="auto"
+                        fontFamily={"Ubuntu, sans-serif"}
+                        color="teal"
+                        w="350px"
+                        fontSize={"18px"}
+                      >
+                        {el.productID.title}
+                      </Text>
+                    </Box>
+                  </Box>
+                  <Text
+                    mt={{ lg: "130px" }}
+                    fontSize="24px"
+                    fontFamily={"Ubuntu, sans-serif;"}
+                    mr={{ lg: "100px" }}
+                    color="teal"
+                  >
+                    ₹ {el.productID.mrp}
+                  </Text>
+                </Flex>
+                <Flex mt="20px" mb="40px">
+                  <Text ml="40px" fontSize={"20px"} color="gray">
+                    Quantity{" "}
+                  </Text>
+                  <Flex gap={4}>
+                    <Button
+                      ml="20px"
+                      variant="outline"
+                      disabled={el.quantity === 1}
+                      colorScheme={"red"}
+                      onClick={() => handlePutCart(el.productID._id)}
+                    >
+                      <GrSubtract />
+                    </Button>
+                    <Text fontSize={"25px"}>{el.quantity}</Text>
+                    <Button
+                      colorScheme={"green"}
+                      variant="outline"
+                      onClick={() => handlePostCart(el.productID._id)}
+                    >
+                      <AiOutlinePlus />
+                    </Button>
+                    <Button
+                      colorScheme={"red"}
+                      onClick={() => handleDelete(el._id)}
+                    >
+                      DELETE
+                    </Button>
+                  </Flex>
+                </Flex>
+              </>
+            ))}
           {/* <div ref={space}></div> */}
-
-
         </Flex>
+
         <Box>
-          <Text>Total Payment - {data.totalPayment}</Text>
+          <Flex justifyContent={"space-around"}>
+            <Text
+              mt="10px"
+              fontFamily={"Ubuntu, sans-serif;"}
+              color="teal.500"
+              fontSize={"24px"}
+            >
+              Total Amount
+            </Text>
+            <Text ml="40px" color={"red"} mt="25px">
+              {<GrSubtract color="red" />}
+            </Text>
+            <Text
+              mt="10px"
+              color="teal.500"
+              fontFamily={"Ubuntu, sans-serif"}
+              fontSize={"24px"}
+            >
+              ₹ {data.totalPayment}
+            </Text>
+          </Flex>
         </Box>
       </Box>
       <Box
-       borderRadius={"15px"}
-       border={"0.5px solid blue"}
-       mt={"10px"}
-       height="570px"
-       display={"inline-block"}
-       ml={"905px"}
-       width={"40%"}
+        borderRadius={"15px"}
+        // border={"0.5px solid blue"}
+        mt={"10px"}
+        height="570px"
+        display={"inline-block"}
+        ml={"905px"}
+        width={"40%"}
       >
+        <Flex justifyContent={"space-around"}>
+        <Box h="180px" backgroundColor={"teal.100"} w="220px" borderRadius={"28px"} ml="20px" mt="20px" >
+          <Text fontSize={"24px"} color="teal.800"
+              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" >Total Payable Amount</Text>
+
+              <Text fontSize={"24px"} color="teal.800"
+              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" > ₹ {data.totalPayment}</Text>
+
+        </Box>
+
+        <Box h="180px" w="220px" backgroundColor={"blue.200"} borderRadius={"28px"} ml="20px" mt="20px">
+              <Text fontSize={"24px"} color="blue.800"
+              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" >Your Cart Items</Text>
+              <Text
+              fontSize={"24px"} color="blue.800"
+              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" 
+              >{data.cartItems ? data.cartItems.length : 0 } Products</Text>
+              <Text fontSize={"24px"} color="blue.800"
+              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" >Added</Text>
+
+        </Box>
+
+
+        </Flex>
+
+        <Heading fontSize={"24px"} color="blue.500"
+              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="44px" >Choose Payment Method</Heading>
+        <Box mt="30px">
+
         <label className="rad-label">
           <input
             type="radio"
@@ -227,7 +340,13 @@ function Payment() {
           <div className="rad-design"></div>
           <div className="rad-text">Razor Pay Online</div>
         </label>
-        <Button onClick={() => handlePayment(data.totalPayment)}>Pay Now</Button>
+        </Box>
+        <Box textAlign={"center"} mt="20px">
+        <Button colorScheme={"green"} variant="solid" onClick={() => handlePayment(data.totalPayment)}>
+          PLACE ORDER
+        </Button>
+
+        </Box>
       </Box>
     </>
   );

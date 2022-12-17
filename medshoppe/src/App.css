@@ -13,6 +13,14 @@
   }
 }
 
+.imageFromPayment:hover{
+  height: 190px;
+  width: 190px;
+  cursor: pointer;
+  
+
+}
+
 body{
   overflow: overlay;
 }
