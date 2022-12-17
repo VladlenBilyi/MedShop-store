@@ -1,8 +1,9 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import FormLogin from "../components/LogInPages/Form";
 
 function Login(){
     return <Box >
-        Hello
+        <FormLogin />
        </Box>          
 }
 

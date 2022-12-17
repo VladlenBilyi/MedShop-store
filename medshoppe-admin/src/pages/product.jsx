@@ -8,6 +8,7 @@ import {RiDeleteBin5Line} from 'react-icons/ri';
 import '../styles/pagination.css';
 import ReactPaginate from "react-paginate";
 import { useSearchParams,Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 function getPageFromUrl(value) {
     if (value <= 0 || value===undefined) {
       value = 1;
@@ -17,9 +18,10 @@ function getPageFromUrl(value) {
     return value;
   }
 function Product(){
+  const {data} = useSelector(store=>store.auth)
   const [searchParams, setSearchParam] = useSearchParams();
   const [loading,setLoading] = useState(false)
-  const [data,setData] = useState([]);
+  const [data1,setData] = useState([]);
   const toast = useToast()
   const { isOpen,onOpen, onClose } = useDisclosure();
   const value3 = getPageFromUrl(searchParams.get("page"));
@@ -58,6 +60,56 @@ const handleQ = async(q)=>{
     }
    
 }
+
+
+const deleteItem = async(id)=>{
+  let res = fetch(`https://crimson-indri-sock.cyclic.app/product/${id}`,{
+        method:'DELETE',
+        headers:{
+          access_token : data.AccessToken
+        }
+  }).then((e)=>e.json()).then((e)=>{
+  if(e.status){
+    toast({
+      title: 'Deleted Success',
+      description: "Product is not found",
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      position:'top'
+    })
+    setLoading(true);
+      let res1 = fetch(`https://crimson-indri-sock.cyclic.app/product/admin/prod?limit=20&page=${page}`).then((rs)=>rs.json())
+      .then((rs)=>setData(rs.data))
+      .finally(()=>{
+      setLoading(false)
+  })
+  setTotalPage(6)
+  }
+  else{
+    toast({
+      title: 'Not Authorize',
+      description: "Product is not deleted",
+      status: 'error',
+      duration: 3000,
+      isClosable: true,
+      position:'top'
+    })
+  }
+}
+  )
+  .catch((err)=>{
+    toast({
+      title: 'Not Authorize',
+      description: "Product is not deleted",
+      status: 'error',
+      duration: 3000,
+      isClosable: true,
+      position:'top'
+    })
+  })
+}
+
   useEffect(()=>{
     setLoading(true)
     async function getData(){
@@ -86,7 +138,7 @@ const handleQ = async(q)=>{
                                 return <Box key={ele} borderRadius="10px" alignItems="center" >
                                     <Skeleton m='auto' width='100%' height='200px' />
                                 </Box>
-                              }): data?.map((ele)=>{
+                              }): data1?.map((ele)=>{
                            return <Box key={ele._id} borderRadius="10px" alignItems="center" boxShadow='rgba(0, 0, 0, 0.35) 0px 5px 15px'>
                             <Box
                              bg='#ffd49f' color='#c07700'
@@ -109,7 +161,7 @@ const handleQ = async(q)=>{
                                </Link>
                           </Flex>
                           <Flex alignItems='center' justifyContent='center' borderRadius='10px' w='40px' p='8px 3px'  color='red'>
-                               <RiDeleteBin5Line fontSize='20px' />
+                               <RiDeleteBin5Line onClick={()=>deleteItem(ele._id)} fontSize='20px' />
                           </Flex>
                             </Flex>
                             </Flex>
