@@ -1,126 +1,13 @@
-// import React from "react";
-// import {
-//   MDBBtn,
-//   MDBCard,
-//   MDBCardBody,
-//   MDBCol,
-//   MDBContainer,
-//   MDBInput,
-//   MDBRow,
-// } from "mdb-react-ui-kit";
-
-// export default function Payment() {
-//   return (
-//     <MDBContainer
-//       className="py-5"
-//       fluid
-//     //   style={{
-//     //     backgroundImage:
-//     //       "url(https://mdbcdn.b-cdn.net/img/Photos/Others/background3.webp)",
-//     //   }}
-//     >
-//       <MDBRow className=" d-flex justify-content-center">
-//         <MDBCol md="10" lg="8" xl="5">
-//           <MDBCard className="rounded-3">
-//             <MDBCardBody className="p-4">
-//               <div className="text-center mb-4">
-//                 <h3>Card</h3>
-//                 <h6>Payment</h6>
-//               </div>
-//               <p className="fw-bold mb-4 pb-2">Saved cards:</p>
-//               <div className="d-flex flex-row align-items-center mb-4 pb-1">
-//                 <img
-//                   className="img-fluid"
-//                   src="https://img.icons8.com/color/48/000000/mastercard-logo.png"
-//                 />
-//                 <div className="flex-fill mx-3">
-//                   <div className="form-outline">
-//                     <MDBInput
-//                       label="Card Number"
-//                       id="form1"
-//                       type="text"
-//                       size="lg"
-//                       value="**** **** **** 3193"
-//                     />
-//                   </div>
-//                 </div>
-//                 <a href="#!">Remove card</a>
-//               </div>
-//               <div className="d-flex flex-row align-items-center mb-4 pb-1">
-//                 <img
-//                   className="img-fluid"
-//                   src="https://img.icons8.com/color/48/000000/visa.png"
-//                 />
-//                 <div className="flex-fill mx-3">
-//                   <div className="form-outline">
-//                     <MDBInput
-//                       label="Card Number"
-//                       id="form2"
-//                       type="text"
-//                       size="lg"
-//                       value="**** **** **** 4296"
-//                     />
-//                   </div>
-//                 </div>
-//                 <a href="#!">Remove card</a>
-//               </div>
-//               <p className="fw-bold mb-4">Add new card:</p>
-//               <MDBInput
-//                 label="Cardholder's Name"
-//                 id="form3"
-//                 type="text"
-//                 size="lg"
-//                 value=""
-//               />
-//               <MDBRow className="my-4">
-//                 <MDBCol size="7">
-//                   <MDBInput
-//                     label="Card Number"
-//                     id="form4"
-//                     type="text"
-//                     size="lg"
-//                     value=""
-//                   />
-//                 </MDBCol>
-//                 <MDBCol size="3">
-//                   <MDBInput
-//                     label="Expire"
-//                     id="form5"
-//                     type="password"
-//                     size="lg"
-//                     placeholder="MM/YYYY"
-//                   />
-//                 </MDBCol>
-//                 <MDBCol size="2">
-//                   <MDBInput
-//                     label="CVV"
-//                     id="form6"
-//                     type="password"
-//                     size="lg"
-//                     placeholder="CVV"
-//                   />
-//                 </MDBCol>
-//               </MDBRow>
-//               <MDBBtn color="success" size="lg" block>
-//                 Add card
-//               </MDBBtn>
-//             </MDBCardBody>
-//           </MDBCard>
-//         </MDBCol>
-//       </MDBRow>
-//     </MDBContainer>
-//   );
-// }
-
-import { Box, Button, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Payment() {
   const [checkedItems_1, setCheckedItems_1] = useState(false);
   const [checkedItems_2, setCheckedItems_2] = useState(false);
   const [loading, setLoading] = useState(false);
+  const space = useRef(null);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
@@ -130,7 +17,7 @@ function Payment() {
     try {
       const headers = {
         access_token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWQ4NmYzODA1ZGIxYjBjN2JjZDEwMSIsInVzZXJuYW1lIjoidW1hbmcgYXJvcmEiLCJ1c2VyVHlwZSI6InVzZXIiLCJpYXQiOjE2NzEyNzM4NzUsImV4cCI6MTY3MTM2MDI3NX0.mC5O19Xe0fm55PIqQAM3KjHFcGnl_GVEv_sWcMLkix0",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWRlNDM4MzM4ZDdmMWJiNDY4N2E5OCIsImVtYWlsIjoidW1hbmdhcm9yYTAxMzRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1bWFuZyBhcm9yYSIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY3MTI5MTk3MCwiZXhwIjoxNjcxMzc4MzcwfQ.Go1z6-W0P6I2oAMJWpJZHqixbW_-E6In5BSc91Xd1fg",
       };
       const res = await axios.get(
         "https://crimson-indri-sock.cyclic.app/cart/items",
@@ -138,18 +25,19 @@ function Payment() {
       );
       setLoading(false);
       setData(res.data);
+      space.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
       console.log(error);
     }
   };
   // handleGetCart();
-  // console.log(data,loading);
+  console.log(data,loading);
 
   const handlePutCart = async (product_id) => {
     try {
       const headers = {
         access_token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWQ4NmYzODA1ZGIxYjBjN2JjZDEwMSIsInVzZXJuYW1lIjoidW1hbmcgYXJvcmEiLCJ1c2VyVHlwZSI6InVzZXIiLCJpYXQiOjE2NzEyNzM4NzUsImV4cCI6MTY3MTM2MDI3NX0.mC5O19Xe0fm55PIqQAM3KjHFcGnl_GVEv_sWcMLkix0",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWRlNDM4MzM4ZDdmMWJiNDY4N2E5OCIsImVtYWlsIjoidW1hbmdhcm9yYTAxMzRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1bWFuZyBhcm9yYSIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY3MTI5MTk3MCwiZXhwIjoxNjcxMzc4MzcwfQ.Go1z6-W0P6I2oAMJWpJZHqixbW_-E6In5BSc91Xd1fg",
       };
       const res = await axios.put(
         "https://crimson-indri-sock.cyclic.app/cart/items",
@@ -167,7 +55,7 @@ function Payment() {
     try {
       const headers = {
         access_token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWQ4NmYzODA1ZGIxYjBjN2JjZDEwMSIsInVzZXJuYW1lIjoidW1hbmcgYXJvcmEiLCJ1c2VyVHlwZSI6InVzZXIiLCJpYXQiOjE2NzEyNzM4NzUsImV4cCI6MTY3MTM2MDI3NX0.mC5O19Xe0fm55PIqQAM3KjHFcGnl_GVEv_sWcMLkix0",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWRlNDM4MzM4ZDdmMWJiNDY4N2E5OCIsImVtYWlsIjoidW1hbmdhcm9yYTAxMzRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1bWFuZyBhcm9yYSIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY3MTI5MTk3MCwiZXhwIjoxNjcxMzc4MzcwfQ.Go1z6-W0P6I2oAMJWpJZHqixbW_-E6In5BSc91Xd1fg",
       };
       const res = await axios.post(
         "https://crimson-indri-sock.cyclic.app/cart/items",
@@ -185,7 +73,7 @@ function Payment() {
     try {
       const headers = {
         access_token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWQ4NmYzODA1ZGIxYjBjN2JjZDEwMSIsInVzZXJuYW1lIjoidW1hbmcgYXJvcmEiLCJ1c2VyVHlwZSI6InVzZXIiLCJpYXQiOjE2NzEyNzM4NzUsImV4cCI6MTY3MTM2MDI3NX0.mC5O19Xe0fm55PIqQAM3KjHFcGnl_GVEv_sWcMLkix0",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWRlNDM4MzM4ZDdmMWJiNDY4N2E5OCIsImVtYWlsIjoidW1hbmdhcm9yYTAxMzRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1bWFuZyBhcm9yYSIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY3MTI5MTk3MCwiZXhwIjoxNjcxMzc4MzcwfQ.Go1z6-W0P6I2oAMJWpJZHqixbW_-E6In5BSc91Xd1fg",
       };
       const res = await axios.delete(
         `https://crimson-indri-sock.cyclic.app/cart/items/${cart_id}`,
@@ -204,6 +92,7 @@ function Payment() {
       return navigate("/paymentsuccess");
     } else if (checkedItems_2 === true) {
       try {
+        console.log(num);
         const key = await axios.get(`http://localhost:8080/razor/key`);
         const data = await axios.post(`http://localhost:8080/razor/payment`, {
           amount: num,
@@ -252,12 +141,41 @@ function Payment() {
 
   return (
     <>
-      <Box>
+      <Box
+      borderRadius={"15px"}
+      border={"0.5px solid teal"}
+      mt={"10px"}
+      position="absolute"
+      height="570px"
+      display={"inline-block"}
+      ml={"10px"}
+      width={"55%"}
+      >
+        <Box display={"flex"} w={""} justifyContent="space-between">
+          <Heading ml="100px" mt="10px">Product Details</Heading>
+          <Text mt="15px" mr="100px">Price</Text>
+
+        </Box>
+        <Flex
+         flexDirection={"column"}
+         height={"480px"}
+         mt={{ base: "-15px", lg: "auto" }}
+         overflow="scroll"
+        >
         {data.cartItems &&
           data.cartItems.map((el, i) => (
-            <Box key={i}>
+            <Box key={i}
+            justify="right"
+            alignItems="right"
+            height="auto"
+            w={{ base: "auto", lg: "auto" }}
+            mt={{ base: "20px", lg: "20px" }}
+            ml={{ base: "-480px", lg: "40px" }}
+            gap="2"
+           
+            >
               <Text>{el.productID.title}</Text>
-              <Image src={el.productID.img1} />
+              <Image h="80px" w={"80px"} src={el.productID.img1} />
               <Text>MRP : {el.productID.mrp}</Text>
               <Button onClick={() => handlePutCart(el.productID._id)}>-</Button>
               <Text>Quantity {el.quantity}</Text>
@@ -269,8 +187,23 @@ function Payment() {
               </Button>
             </Box>
           ))}
+          {/* <div ref={space}></div> */}
+
+
+        </Flex>
+        <Box>
+          <Text>Total Payment - {data.totalPayment}</Text>
+        </Box>
       </Box>
-      <Box>
+      <Box
+       borderRadius={"15px"}
+       border={"0.5px solid blue"}
+       mt={"10px"}
+       height="570px"
+       display={"inline-block"}
+       ml={"905px"}
+       width={"40%"}
+      >
         <label className="rad-label">
           <input
             type="radio"
@@ -294,7 +227,7 @@ function Payment() {
           <div className="rad-design"></div>
           <div className="rad-text">Razor Pay Online</div>
         </label>
-        <Button onClick={() => handlePayment(1)}>Pay Now</Button>
+        <Button onClick={() => handlePayment(data.totalPayment)}>Pay Now</Button>
       </Box>
     </>
   );
