@@ -30,7 +30,7 @@ export const AllRoutes=()=>{
             <Route path="/payment" element={<Payment/>}/>
             <Route path="/paymentsuccess" element={<PaymentSuccess/>}/>
             <Route path="/paymentfailure" element={<PaymentFailure/>}/>
-            <Route path="/category" element={<HealthcarePage/>}/>
+            <Route path="/healthcare" element={<HealthcarePage/>}/>
             <Route path="/ordermedicine" element={<OrderMedicinesPage/>}/>
             
         </Routes>
