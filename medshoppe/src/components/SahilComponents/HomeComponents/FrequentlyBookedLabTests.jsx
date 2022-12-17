@@ -1,6 +1,7 @@
-import "./Home_Styles/FrequentlyBookedLabTests.css";
 
+import "./Home_Styles/FrequentlyBookedLabTests.css";
 const FrequentlyBookedLabTests = () => {
+  
     return (
         <div className="Home_FrequentlyBookedLabTests_Container">
             <p>Frequently Booked Lab Tests</p>

@@ -6,21 +6,21 @@ const HomePage_Navbar = () => {
   
     return (
       <>
-        <section className="lokesh_home_navbar">
+        <section className="sahil_home_navbar">
             <div>
-                <div className="lokesh_home_nav_first-section">
-                    <Link to="/orderMed"><div>Medicine</div></Link>
-                    <Link to="/labtest"><div>Lab Tests</div></Link>
-                    <Link to="/healthcare"><div>Healthcare</div></Link>
-                    <Link to="/healthcare"><div>Health Blogs</div></Link>
-                    <Link to="/rtpcr"><div>PLUS</div></Link>
-                    <Link to="/healthcare"><div>Offers</div></Link>
-                    <Link to="/healthcare"><div>Surgeries</div></Link>
-                    <Link to="/healthcare"><div>Value Store</div></Link>
+                <div className="sahil_home_nav_first-section">
+                    <Link to="/ordermedicine"><div>Medicine</div></Link>
+                    <Link to="/"><div>Lab Tests</div></Link>
+                    <Link to="/category"><div>Healthcare</div></Link>
+                    <Link to="/category"><div>Health Blogs</div></Link>
+                    <Link to="/"><div>PLUS</div></Link>
+                    <Link to="/"><div>Offers</div></Link>
+                    <Link to="/"><div>Surgeries</div></Link>
+                    <Link to="/"><div>Value Store</div></Link>
                 </div>
             </div>
             <div>
-                <div className="lokesh_home_nav_second-section">
+                <div className="sahil_home_nav_second-section">
                 <Link to="/healthcare"><div>Navigate to</div></Link>
                     <Link to="/healthcare"><div>Categories</div></Link>
                     <Link to="/healthcare"><div>Deals of the day</div></Link>

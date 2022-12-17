@@ -10,3 +10,14 @@ export const Cdata = {
   }]
 };
 
+export const Ddata = {
+  labels: ['users','product','order success', 'order pending'],
+  datasets: [{
+    label: 'All Data Quanity',
+    data: [23,30,35,40],
+    fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1
+  }]
+};
+
