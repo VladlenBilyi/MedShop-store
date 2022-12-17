@@ -34,6 +34,7 @@ app.post("/payment", async (req, res) => {
     const order = await instance.orders.create(options);
     res.status(200).send(order);
   } catch (error) {
+    console.log(error);
     res.status(404).send(error);
   }
 });

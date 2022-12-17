@@ -153,11 +153,11 @@ const OrderMedicines = () => {
                 </div>
                 <div className={styles.select}>
                   <input type="text" placeholder="Select Pincode" />
-                  <Select
-                    placeholder="Search medicines/Healthcare products"
-                    svg=""
-                    options={options}
-                  />
+                  {/* <Select */}
+                    {/* placeholder="Search medicines/Healthcare products" */}
+                    {/* svg="" */}
+                    {/* options={options} */}
+                  {/* /> */}
                 </div>
               </div>
             </div>

@@ -2,15 +2,15 @@ import { Route, Routes } from "react-router-dom"
 
 
 import Homepage from "../Pages/Home/Home";
-import { ProductInfo } from "../components/productInfo";
-import {Productspage} from "../components/productsPage";
-import Form from '../components/LogInPages/Form';
-import {Cart} from '../components/Cart/Cart';
-import Advanced from '../components/Checkout/Advanced';
-import Payment from '../components/Payment/Payment';
+import { ProductInfo } from "../Components/productInfo";
+import {Productspage} from "../Components/productsPage";
+import Form from '../Components/LogInPages/Form';
+import {Cart} from '../Components/Cart/Cart';
+import Advanced from '../Components/Checkout/Advanced';
+import Payment from '../Components/Payment/Payment';
 import HealthcarePage from "../Pages/Healthcare/HealthcarePage";
-import Navbar from '../components/SahilComponents/Navbar/Navbar';
-import Footer from '../components/SahilComponents/Footer/Footer';
+import Navbar from '../Components/SahilComponents/Navbar/Navbar';
+import Footer from '../Components/SahilComponents/Footer/Footer';
 import PaymentSuccess from "../Components/Payment/PaymentSuccess";
 import PaymentFailure from "../Components/Payment/PaymentFailure";
 import OrderMedicinesPage from "../Pages/OrderMedicines/OrderMedicinesPage";
