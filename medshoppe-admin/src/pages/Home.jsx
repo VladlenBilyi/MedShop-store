@@ -6,6 +6,7 @@ import LineChart from "../components/chart.line";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import {GiCartwheel} from 'react-icons/gi'
 import {FaRupeeSign} from 'react-icons/fa'
+import PieChart from "../components/donutChart";
 function Home(){
   const { isOpen,onOpen, onClose } = useDisclosure();
     return <Flex w='100%'>
@@ -13,7 +14,6 @@ function Home(){
              <Box w={['100%','100%','100%','80%']} ml={['0px','0px','0px','20%']} mb='60px'>
              <Navbar onOpen={onOpen}/>
              <Box w='90%' m='auto'>
-
               <Box>
               <Flex flexWrap='wrap' gap='30px' justifyContent='center' alignItems='center' mt='50px' mb='70px'>
               <Box borderRadius='10px' w='300px' p='20px' bg='#ffcff2' color='#ff4bcc'>
@@ -63,6 +63,9 @@ function Home(){
                     </Box>
               </Flex>
 
+             </Box>
+             <Box mt='50px'>
+                 <PieChart />
              </Box>
               <Box>
               <Text fontSize='30px' color='green' fontWeight='600'>Current Sale Chart</Text> 
