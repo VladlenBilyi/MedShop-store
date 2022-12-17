@@ -1,14 +1,15 @@
 import { Route, Routes } from "react-router-dom"
-import {Home} from '../Components/SahilComponents/homePages/Home';
-import {Productspage} from '../Components/productsPage';
-import {ProductInfo} from '../Components/productInfo';
-import Form from '../Components/LogInPages/Form';
-import {Cart} from '../Components/Cart/Cart';
-import Advanced from '../Components/Checkout/Advanced';
-import Payment from '../Components/Payment/Payment';
-import {Healthcare} from '../Components/SahilComponents/Healthcare/Healthcare';
-import Navbar from '../Components/SahilComponents/Navbar/Navbar';
-import Footer from '../Components/SahilComponents/Footer/Footer'
+import {Home} from "../components/SahilComponents/homePages/Home"
+import {Productspage} from "../components/productsPage"
+import {ProductInfo} from "../components/productInfo"
+import Navbar from "../components/SahilComponents/Navbar/Navbar"
+import Form from "../components/LogInPages/Form"
+import {Cart} from "../components/Cart/Cart"
+import Advanced from "../components/Checkout/Advanced"
+import Payment from "../components/Payment/Payment"
+import {Healthcare} from "../components/SahilComponents/Healthcare/Healthcare"
+import Footer from "../components/SahilComponents/Footer/Footer"
+
 export const AllRoutes=()=>{
     return (
         
