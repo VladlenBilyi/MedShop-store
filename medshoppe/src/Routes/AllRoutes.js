@@ -9,6 +9,8 @@ import Payment from '../Components/Payment/Payment';
 import {Healthcare} from '../Components/SahilComponents/Healthcare/Healthcare';
 import Navbar from '../Components/SahilComponents/Navbar/Navbar';
 import Footer from '../Components/SahilComponents/Footer/Footer'
+import PaymentSuccess from "../Components/Payment/PaymentSuccess";
+import PaymentFailure from "../Components/Payment/PaymentFailure";
 export const AllRoutes=()=>{
     return (
         
@@ -22,6 +24,8 @@ export const AllRoutes=()=>{
             <Route path="/cart" element={<Cart/>}/>
             <Route path="/checkout" element={<Advanced/>}/>
             <Route path="/payment" element={<Payment/>}/>
+            <Route path="/paymentsuccess" element={<PaymentSuccess/>}/>
+            <Route path="/paymentfailure" element={<PaymentFailure/>}/>
             <Route path="/category" element={<Healthcare/>}/>
             
         </Routes>
