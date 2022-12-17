@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom"
+
 import Homepage from "../Pages/Home/Home";
 import { ProductInfo } from "../components/productInfo";
 import {Productspage} from "../components/productsPage";
@@ -10,6 +11,7 @@ import HealthcarePage from "../Pages/Healthcare/HealthcarePage";
 import Navbar from '../components/SahilComponents/Navbar/Navbar';
 import Footer from '../components/SahilComponents/Footer/Footer'
 import OrderMedicinesPage from "../Pages/OrderMedicines/OrderMedicinesPage";
+
 export const AllRoutes=()=>{
     return (
         
