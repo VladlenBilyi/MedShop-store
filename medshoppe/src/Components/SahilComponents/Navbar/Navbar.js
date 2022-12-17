@@ -32,8 +32,8 @@ const Navbar = () => {
                 <Flex ml={"15rem"} p="0 27px" w={"70vw"} justifyContent="space-between">
 
                     <Flex gap={"16px"}>
-                        <Link to={"/"}><Text fontSize={"lg"} color="white" >Order Medicines</Text></Link>
-                        <Link to={"/"}>
+                        <Link to={"/ordermedicine"}><Text fontSize={"lg"} color="white" >Order Medicines</Text></Link>
+                        <Link to={"/category"}>
                             <Text fontSize={"lg"} color="white" >Healthcare Products</Text>
                         </Link>
                         <Link to={"/"}>
@@ -53,7 +53,7 @@ const Navbar = () => {
                             </Center>
                         </Link>
 
-                        <Link to={"/"}>
+                        <Link to={"/login"}>
                             <Center>
                                 <CgProfile color="white" fontSize={"20px"} />
                                 <Text fontSize={"lg"} color="white" w={"115px"}>Login/Signup</Text>
