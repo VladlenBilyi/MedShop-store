@@ -29,21 +29,24 @@ export const Productspage = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
     // const [category,setCategory]=useState("")
-    const [low, setLow] = useState(low1)
-    const [high, setHigh] = useState(high1)
-    const [sort, setSort] = useState(sort1)
-    const [value, setValue] = useState(value1)
-    const [value2, setValue2] = useState("")
-   
-    const [show,setShow]=useState(false)
-    const dispatch = useDispatch()
 
-    useEffect(() => {
-        onClose()
-        let [a, b] = value2.split(":")
-        if (a == "h") {
-            setHigh(+b)
-            setLow(0)
+    const [low,setLow]=useState(low1)
+    const [high,setHigh]=useState(high1)
+    const [sort,setSort]=useState(sort1)
+    const [value,setValue]=useState(value1)
+    const [value2,setValue2]=useState("")
+    const {categorie}=useSelector((store)=>store.products)
+
+
+
+
+    const dispatch=useDispatch()
+    console.log(categorie)
+    useEffect(()=>{
+        let [a,b]=value2.split(":")
+        if(a=="h"){
+           setHigh(+b)
+           setLow(0)
         }
         else if (a == "l") {
             setLow(+b)

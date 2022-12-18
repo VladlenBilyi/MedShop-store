@@ -1,4 +1,4 @@
-import { AUTH_ERROR, AUTH_LOADING, AUTH_LOGOUT, AUTH_SIGNIN_SUCCESS, AUTH_SIGNUP_SUCCESS } from "./auth.types";
+import { AUTH_ERROR, AUTH_LOADING, AUTH_LOGOUT, AUTH_SIGNIN_SUCCESS } from "./auth.types";
 import axios from 'axios';
 const host = 'https://crimson-indri-sock.cyclic.app';
 export const signinAPI = (data) => async (dispatch) => {
@@ -33,12 +33,6 @@ export const signupAPI = (data) => async (dispatch) => {
     }
 }
 export const logoutAPI = () => {
+    localStorage.removeItem("MEDSHOPPE")
     return {type:AUTH_LOGOUT}
 }
-
-
-
-
-
-
-

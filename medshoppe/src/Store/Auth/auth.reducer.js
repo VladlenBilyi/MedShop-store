@@ -70,6 +70,7 @@ export const authReducer = (state = initState, action) => {
                 error: false,
                 token: action.token.AccessToken,
                 isAuth: true,
+
                 data: action.token.user,
                 email:decoded.email
             }
@@ -84,10 +85,21 @@ export const authReducer = (state = initState, action) => {
         //         data: action.token.user
         //     }
         // }
+                data: decoded,
+                email:decoded.email
+            }
+        }
         case AUTH_LOGOUT: {
             return {
                 ...state,
-                ...initState
+                
+                    loading: false,
+                    error: false,
+                    isAuth: false,
+                    token: "",
+                    data: "",
+                    email:""
+                
             }
         }
         default: {
