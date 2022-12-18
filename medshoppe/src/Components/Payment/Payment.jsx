@@ -132,7 +132,8 @@ function Payment() {
   useEffect(() => {
     handleGetCart();
   }, []);
-
+  const totalPayment = Math.ceil(data?.totalPayment);
+  
   const handleChange_1 = (e) => {
     setCheckedItems_1(true);
     setCheckedItems_2(false);
@@ -287,7 +288,7 @@ function Payment() {
               fontFamily={"Ubuntu, sans-serif"}
               fontSize={"24px"}
             >
-              ₹ {data.totalPayment}
+              ₹ {totalPayment}
             </Text>
           </Flex>
         </Box>
@@ -328,7 +329,7 @@ function Payment() {
               mt="13px"
             >
               {" "}
-              ₹ {data.totalPayment}
+              ₹ {totalPayment}
             </Text>
           </Box>
 
@@ -408,7 +409,7 @@ function Payment() {
           <Button
             colorScheme={"green"}
             variant="solid"
-            onClick={() => handlePayment(data.totalPayment)}
+            onClick={() => handlePayment(totalPayment)}
           >
             PLACE ORDER
           </Button>

@@ -13,7 +13,7 @@ import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { CartItem } from './CartItem'
 import { CartOrderSummary } from './CartOrderSummary'
-import { cartData } from './_data'
+
 
 
 
@@ -39,20 +39,21 @@ export const Cart = () => {
           priceChange(json.cartItems);
           quantityChange(json.cartItems);
         });
-         //console.log(data);
+        
         
   } catch (error) {
       console.log(error)
   }
   },[]);
+  console.log(data);
 
   const priceChange = (dataItems) => {
-    const total = dataItems.reduce((value, item) => (item.productID.mrp * item.quantity) + value, 0);
+    const total =  dataItems.length>=1 ? dataItems.reduce((value, item) => (item.productID.mrp * item.quantity) + value, 0) :"";
     setTotalPrice(total);
     localStorage.setItem('totalPrice', total);
   }
   const quantityChange = (dataItems) => {
-    const qty = dataItems.reduce((value, item) => item.quantity + value, 0);
+    const qty = dataItems.length>=1 ? dataItems.reduce((value, item) => item.quantity + value, 0) : "";
     setQuantity(qty);
     localStorage.setItem('quantity', qty);
   }
@@ -65,7 +66,7 @@ export const Cart = () => {
 
   const onClickDelete = (index) => {
     if (index >= 0) {
-      data.splice(index, 1);
+      data?.splice(index, 1);
       setData(data);
       priceChange(data);
       quantityChange(data);
@@ -114,9 +115,9 @@ export const Cart = () => {
         </Heading>
 
         <Stack spacing="6">
-          {data.map((item, index) => (
+          {data!=="No CartItems Found from this userID" ? data?.map((item, index) => (
             <CartItem key={item.id} {...item} onChangeQuantity={onChangeQuantity.bind(this, item)} onClickDelete={onClickDelete.bind(this, index)} />
-          ))}
+          )) : ""}
         </Stack>
       </Stack>
 

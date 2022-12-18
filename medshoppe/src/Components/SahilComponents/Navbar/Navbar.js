@@ -77,7 +77,7 @@ const Navbar = () => {
             </Link>
             <Link to={"/category"}>
               <Text fontSize={"lg"} color="white">
-                Healthcare Products
+                Healthcare & Products
               </Text>
             </Link>
             <Link to={"/"}>

@@ -105,7 +105,7 @@ function Navbardrawer() {
 
               {isAuth ? (
                 <Menu>
-                  <MenuButton color={"white"}>{data?.username}</MenuButton>
+                  <MenuButton color={"white"}>Hii, {data?.username}</MenuButton>
                   <MenuList>
                     <MenuItem>{data?.username}</MenuItem>
                     <MenuItem>{email}</MenuItem>
