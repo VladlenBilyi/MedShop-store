@@ -1,4 +1,5 @@
- import React from "react";
+ import { Box, Flex } from "@chakra-ui/react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
  import * as Components from './Design';
@@ -40,17 +41,18 @@ import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
      const HandelSubmitForLogin=(e)=>{
         e.preventDefault();
         dispatch(signinAPI(login)).then((res)=>{
-            
-            //console.log(res.data.token);    
+            SetLogin(initialStateLogin)
+            console.log(res);    
         })
         
      }
-     console.log(token);
+     //console.log(token);
 
      const HandelSubmitForSignup=(e)=>{
         e.preventDefault();
-        console.log(signup)
+        // console.log(signup)
         dispatch(signupAPI(signup)).then((res)=>{
+            SetSignup(initialStateSignup)
             console.log(res);
         })
         
@@ -61,7 +63,10 @@ import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
 
       return(
          <>
+         
           <Components.Container>
+          <Flex flexDirection={["column","column","row","row"]}>
+            <Box>
               <Components.SignUpContainer signinIn={signIn}>
                   <Components.Form>
                       <Components.Title>Create Account</Components.Title>
@@ -81,6 +86,8 @@ import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
                        <Components.Button onClick={HandelSubmitForLogin}>Sigin In</Components.Button>
                    </Components.Form>
               </Components.SignInContainer>
+              </Box>
+              
 
               <Components.OverlayContainer signinIn={signIn}>
                   <Components.Overlay signinIn={signIn}>
@@ -107,8 +114,9 @@ import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
   
                   </Components.Overlay>
               </Components.OverlayContainer>
-
+              </Flex>
           </Components.Container>
+          
           </>
       )
  }
