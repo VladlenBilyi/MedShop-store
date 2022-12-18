@@ -3,6 +3,7 @@ import './Advanced.css';
 import { MDBAccordion, MDBAccordionItem, MDBBtn, MDBCard, MDBCardBody, MDBCardFooter, MDBCardHeader, MDBCardImage, MDBCheckbox, MDBCol, MDBContainer, MDBInput, MDBListGroup, MDBListGroupItem, MDBRow, MDBTextArea, MDBTypography } from 'mdb-react-ui-kit';
 import { useDisclosure } from '@chakra-ui/react';
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
 export default function Advanced() {
   const store = useSelector(store=>store.auth)
   console.log(store.data.email);
@@ -51,19 +52,19 @@ export default function Advanced() {
               </MDBAccordionItem>
             </MDBAccordion>
 
-            <MDBCard className="mb-4">
+            {/* <MDBCard className="mb-4">
               <MDBCardBody>
                 <p className="text-uppercase fw-bold mb-3 text-font">Email address</p>
                 <MDBRow>
                   <MDBCol md="4">
                     <p>{store.data.email}</p>
-                  </MDBCol>
+                  </MDBCol> */}
                   {/* <MDBCol md="7">
                     <MDBBtn outline color="dark" className="float-end button-color">Change</MDBBtn>
                   </MDBCol> */}
-                </MDBRow>
+                {/* </MDBRow>
               </MDBCardBody>
-            </MDBCard>
+            </MDBCard> */}
 
 
           </MDBCol>
@@ -71,7 +72,7 @@ export default function Advanced() {
             <MDBCard className="mb-4">
               <MDBCardHeader className="py-3">
                 <MDBTypography tag="h5" className="mb-0 text-font">
-                  {quantity} item
+                  {quantity} items 
                   {/* <span className="float-end mt-1" style={{ fontSize: '13px' }}>Edit</span> */}
                 </MDBTypography>
               </MDBCardHeader>
@@ -117,16 +118,19 @@ export default function Advanced() {
                   <MDBInput label='Mobile No' type='number' className="mb-4" />
                   <MDBInput label='Zip No' type='number' className="mb-4" />
                   <MDBInput label='City Name' type='text' className="mb-4" />
-                  <MDBTextArea label='Additional information' rows={4} className="mb-4" />
+                  <MDBTextArea label='Your Address' rows={2} className="mb-4" />
 
-                  <div className="d-flex justify-content-center">
+                  {/* <div className="d-flex justify-content-center">
                     <MDBCheckbox name='flexCheck' value='' id='flexCheckChecked' label='Create an account?' defaultChecked />
-                  </div>
+                  </div> */}
                 </form>
               </MDBCardBody>
             </MDBCard>
             <div className="text-center">
+              <Link to="/payment">
               <MDBBtn className="button-order col-md-10">Place order</MDBBtn>
+              
+              </Link>
             </div>
           </MDBCol>
         </MDBRow>

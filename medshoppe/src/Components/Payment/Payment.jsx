@@ -2,6 +2,7 @@ import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
+import {useSelector} from "react-redux";
 import { GrSubtract } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 
@@ -13,13 +14,19 @@ function Payment() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
+  let user_data = useSelector((store)=>store.auth.data);
+  let Email = useSelector((store)=>store.auth.email);
+  console.log(user_data);
+  let phone_data = useSelector((store)=>store.address);
+  console.log(phone_data);
+  
   const handleGetCart = async () => {
     setLoading(true);
 
     try {
       const headers = {
         access_token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWRlNDM4MzM4ZDdmMWJiNDY4N2E5OCIsImVtYWlsIjoidW1hbmdhcm9yYTAxMzRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1bWFuZyBhcm9yYSIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY3MTI5MTk3MCwiZXhwIjoxNjcxMzc4MzcwfQ.Go1z6-W0P6I2oAMJWpJZHqixbW_-E6In5BSc91Xd1fg",
+          user_data.AccessToken,
       };
       const res = await axios.get(
         "https://crimson-indri-sock.cyclic.app/cart/items",
@@ -39,7 +46,7 @@ function Payment() {
     try {
       const headers = {
         access_token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWRlNDM4MzM4ZDdmMWJiNDY4N2E5OCIsImVtYWlsIjoidW1hbmdhcm9yYTAxMzRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1bWFuZyBhcm9yYSIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY3MTI5MTk3MCwiZXhwIjoxNjcxMzc4MzcwfQ.Go1z6-W0P6I2oAMJWpJZHqixbW_-E6In5BSc91Xd1fg",
+        user_data.AccessToken,
       };
       const res = await axios.put(
         "https://crimson-indri-sock.cyclic.app/cart/items",
@@ -57,7 +64,7 @@ function Payment() {
     try {
       const headers = {
         access_token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWRlNDM4MzM4ZDdmMWJiNDY4N2E5OCIsImVtYWlsIjoidW1hbmdhcm9yYTAxMzRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1bWFuZyBhcm9yYSIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY3MTI5MTk3MCwiZXhwIjoxNjcxMzc4MzcwfQ.Go1z6-W0P6I2oAMJWpJZHqixbW_-E6In5BSc91Xd1fg",
+        user_data.AccessToken,
       };
       const res = await axios.post(
         "https://crimson-indri-sock.cyclic.app/cart/items",
@@ -75,7 +82,7 @@ function Payment() {
     try {
       const headers = {
         access_token:
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWRlNDM4MzM4ZDdmMWJiNDY4N2E5OCIsImVtYWlsIjoidW1hbmdhcm9yYTAxMzRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1bWFuZyBhcm9yYSIsInVzZXJUeXBlIjoidXNlciIsImlhdCI6MTY3MTI5MTk3MCwiZXhwIjoxNjcxMzc4MzcwfQ.Go1z6-W0P6I2oAMJWpJZHqixbW_-E6In5BSc91Xd1fg",
+        user_data.AccessToken,
       };
       const res = await axios.delete(
         `https://crimson-indri-sock.cyclic.app/cart/items/${cart_id}`,
@@ -87,31 +94,32 @@ function Payment() {
     }
   };
 
-  const handlePayment = async (num) => {
+  const handlePayment = async (amount) => {
     if (checkedItems_1 === false && checkedItems_2 === false) {
       return;
     } else if (checkedItems_1 === true) {
       return navigate("/paymentsuccess");
     } else if (checkedItems_2 === true) {
       try {
-        console.log(num);
+        // console.log(typeof num);
         const key = await axios.get(`http://localhost:8080/razor/key`);
         const data = await axios.post(`http://localhost:8080/razor/payment`, {
-          amount: num,
+          amount: Math.ceil(amount),
         });
+        console.log(data);
         let options = {
           key: key.data.key,
-          amount: num,
+          amount: data.data.amount,
           currency: "INR",
           name: "MEDSHOPPE",
           description: "Make People Happy",
           image: "https://i.ibb.co/s5mNPnz/1.png",
           order_id: data.data.id,
-          callback_url: `http://localhost:8080/razor/verification?email=umangarora0134@gmail.com&amount=${num}`,
+          callback_url: `http://localhost:8080/razor/verification?email=${Email}&amount=${amount}`,
           prefill: {
-            name: "Umang Arora",
-            email: "umangarora0134@gmail.com",
-            contact: "9999999999",
+            name: user_data.username,
+            email: "",
+            contact: "",
           },
           notes: {
             address: "Razorpay Corporate Office",
@@ -195,8 +203,8 @@ function Payment() {
                     gap="2"
                   >
                     <Flex gap={5}>
-                      <Image className="imageFromPayment" h="180px" w={"180px"} src={el.productID.img1} />
-                      <Image className="imageFromPayment" h="180px" w={"180px"} src={el.productID.img2} />
+                      <Image className="imageFromPayment" h="180px" maxW={"180px"} src={el.productID.img1} />
+                      <Image className="imageFromPayment" h="180px" maxW={"180px"} src={el.productID.img2} />
                     </Flex>
                     <Box>
                       <Text

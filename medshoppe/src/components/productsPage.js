@@ -17,15 +17,16 @@ function getPageUrl(val) {
 }
 
 export const Productspage = () => {
+    const {categorie}=useSelector((store)=>store.products)
     const [searchParams, setSearchParams] = useSearchParams()
-    const { loading, data } = useSelector((store) => store.products)
+    // const { loading, data } = useSelector((store) => store.products)
     const [products, setProducts] = useState([])
     let page1 = getPageUrl(searchParams.get("page"))
     const [page, setPage] = useState(page1)
     let low1 = searchParams.get("low") || 0
     let high1 = searchParams.get("high") || 0
     let sort1 = searchParams.get("sort") || ""
-    let value1 = searchParams.get("category") || ""
+    let value1 = searchParams.get("category") || categorie
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
     // const [category,setCategory]=useState("")
@@ -35,7 +36,6 @@ export const Productspage = () => {
     const [sort,setSort]=useState(sort1)
     const [value,setValue]=useState(value1)
     const [value2,setValue2]=useState("")
-    const {categorie}=useSelector((store)=>store.products)
 
 
 
@@ -210,7 +210,7 @@ export const Productspage = () => {
                     <Flex m="auto" w="200px" gap="10px">
                         <Button disabled={page == 1} onClick={() => setPage(page - 1)}>{"<"} Prev</Button>
                         <Button _hover="none" fontSize="20px" color="white" bg="teal">{page}</Button>
-                        <Button onClick={() => setPage(page + 1)}>Next {">"}</Button>
+                        <Button onClick={() => setPage(page + 1)} disabled={page===6}>Next {">"}</Button>
                     </Flex>
 
                 </Box>

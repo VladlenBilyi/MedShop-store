@@ -15,7 +15,7 @@ import { AddCategories } from "../../../Store/products/products.action";
 
 const categorydata=[{
     "id": 109,
-    "name": "All Category",
+    "name": "All Categories",
     "imageUrl": "https://cdn01.pharmeasy.in/dam/discovery/categoryImages/6d462f424a43372ea8b7b6f8ca13e052.png?f=png",
     "discountText": "Upto 77% off",
     "slug": "covid-essentials-109",

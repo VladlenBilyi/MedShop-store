@@ -50,7 +50,7 @@
 
 .sahil_home_navbar > div:first-child .sahil_home_nav_first-section  div:hover,
 .sahil_home_navbar > div:last-child .sahil_home_nav_second-section  div:hover{
-    color: red;
+    color: gray;
 }
 .mainNavbarBox{
    display: none;

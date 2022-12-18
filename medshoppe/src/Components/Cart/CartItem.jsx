@@ -1,8 +1,10 @@
-import { CloseButton, Flex, Link, Select, useColorModeValue } from '@chakra-ui/react'
+import { Button, CloseButton, Flex, Link, Select, Text, useColorModeValue } from '@chakra-ui/react'
 import * as React from 'react'
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
 import { useState } from 'react'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { GrSubtract } from 'react-icons/gr'
 
 
 
@@ -31,9 +33,24 @@ const decrease = () => {
  
   return (
     <div className="btn__container">
-        <button className="control__btn" onClick={increase.bind(this)}>+</button>
-        <span className="counter__output">{counter}</span>
-        <button className="control__btn" onClick={decrease.bind(this)}>-</button>
+        <Flex gap={4} ml="15px">
+        <Button 
+         colorScheme={"red"}
+         variant="outline"
+        className="control__btn" disabled={counter===1} onClick={decrease.bind(this)}>
+
+        <GrSubtract />
+        </Button>
+        <Text fontSize={"25px"} className="counter__output">{counter}</Text>
+       
+        <Button 
+         colorScheme={"green"}
+         variant="outline"
+        className="control__btn" onClick={increase.bind(this)}>
+        <AiOutlinePlus />
+        </Button>
+
+        </Flex>
         
       </div>
     // <Select

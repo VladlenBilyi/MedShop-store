@@ -18,7 +18,7 @@ import { logoutAPI } from '../../../Store/Auth/auth.action';
 const Navbar = () => {
     const navigate=useNavigate();
         const dispatch=useDispatch();
-    const {data,isAuth}=useSelector((store)=>store.auth)
+    const {data,isAuth,email}=useSelector((store)=>store.auth)
 
 
     return (
@@ -66,14 +66,20 @@ const Navbar = () => {
                         </Link>
 
                        {isAuth? <Menu >
-                        <MenuButton color={"white"} rightIcon={<BsChevronDown/>}>
-                        {data?.username}
+                        <MenuButton color={"white"} rightIcon={<BsChevronDown/>}
+                         fontFamily={"Ubuntu, sans-serif"}
+                         fontSize="18px"
+                        //  color={"blackAlpha.500"}
+                        >
+                        {` Hii , ${data?.username}`}
                         </MenuButton>
                         <MenuList>
-                            <MenuItem>{data?.username}</MenuItem>
-                            <MenuItem>{data?.email}</MenuItem>
+                            <MenuItem  fontFamily={"Ubuntu, sans-serif"}
+            fontSize="18px"
+            color={"blackAlpha.500"}>{data?.username}</MenuItem>
+                            <MenuItem>{email}</MenuItem>
                             <MenuItem>Profile</MenuItem>
-                            <MenuItem onClick={()=>dispatch(logoutAPI())}>Loguot</MenuItem>
+                            <MenuItem onClick={()=>dispatch(logoutAPI())}>Logout</MenuItem>
                         </MenuList>
                         </Menu> :<Link to={"/login"}>
                             <Center>

@@ -40,7 +40,8 @@
 
 
 .Home_PreviouslyBrowsedItems .Home_PreviouslyBrowsedItems_Item div:first-child img{
-    width: 50%;
+    height: 130px;
+    max-width: 90%;
     margin: auto;
 }
 

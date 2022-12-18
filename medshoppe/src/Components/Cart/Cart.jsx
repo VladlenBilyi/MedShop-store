@@ -10,6 +10,7 @@ import {
 import * as React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { CartItem } from './CartItem'
 import { CartOrderSummary } from './CartOrderSummary'
 import { cartData } from './_data'
@@ -21,6 +22,7 @@ export const Cart = () => {
   let [data, setData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [quantity, setQuantity] = useState(0);
+  let user_data = useSelector((store)=>store.auth.data);
 
   useEffect(()=>{
     try {
@@ -28,7 +30,7 @@ export const Cart = () => {
           method: "GET",
           headers: {
               "Content-type": "application/json; charset=UTF-8",
-              "access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWRhZjJhY2IzZmJmZmFmOGIyYWNlNSIsImVtYWlsIjoiZGVtb0BnbWFpbC5jb20iLCJ1c2VybmFtZSI6ImRlbW8iLCJ1c2VyVHlwZSI6InVzZXIiLCJpYXQiOjE2NzEyNzg5NTcsImV4cCI6MTY3MTM2NTM1N30.R08Ap6WG0gKzExIu_-kPC-3pc5D2BeUL9tOLGJZ8quw"
+              "access_token": user_data.AccessToken
           }
         })
         .then(response => response.json())
