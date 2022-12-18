@@ -2,7 +2,7 @@ import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { GrSubtract } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
 
@@ -15,19 +15,18 @@ function Payment() {
   const navigate = useNavigate();
   console.log(data);
 
-  let user_data = useSelector((store)=>store.auth.data);
-  let Email = useSelector((store)=>store.auth.email);
+  let user_data = useSelector((store) => store.auth.data);
+  let Email = useSelector((store) => store.auth.email);
   console.log(user_data);
-  let phone_data = useSelector((store)=>store.address);
+  let phone_data = useSelector((store) => store.address);
   console.log(phone_data);
-  
+
   const handleGetCart = async () => {
     setLoading(true);
 
     try {
       const headers = {
-        access_token:
-          user_data.AccessToken,
+        access_token: user_data.AccessToken,
       };
       const res = await axios.get(
         "https://crimson-indri-sock.cyclic.app/cart/items",
@@ -40,21 +39,17 @@ function Payment() {
       console.log(error);
     }
   };
-  // handleGetCart();
-  console.log(data, loading);
 
   const handlePutCart = async (product_id) => {
     try {
       const headers = {
-        access_token:
-        user_data.AccessToken,
+        access_token: user_data.AccessToken,
       };
       const res = await axios.put(
         "https://crimson-indri-sock.cyclic.app/cart/items",
         { productID: product_id },
         { headers }
       );
-      // console.log(res);
       handleGetCart();
     } catch (error) {
       console.log(error);
@@ -64,15 +59,14 @@ function Payment() {
   const handlePostCart = async (product_id) => {
     try {
       const headers = {
-        access_token:
-        user_data.AccessToken,
+        access_token: user_data.AccessToken,
       };
       const res = await axios.post(
         "https://crimson-indri-sock.cyclic.app/cart/items",
         { productID: product_id },
         { headers }
       );
-      // console.log(res);
+
       handleGetCart();
     } catch (error) {
       console.log(error);
@@ -82,8 +76,7 @@ function Payment() {
   const handleDelete = async (cart_id) => {
     try {
       const headers = {
-        access_token:
-        user_data.AccessToken,
+        access_token: user_data.AccessToken,
       };
       const res = await axios.delete(
         `https://crimson-indri-sock.cyclic.app/cart/items/${cart_id}`,
@@ -102,12 +95,11 @@ function Payment() {
       return navigate("/paymentsuccess");
     } else if (checkedItems_2 === true) {
       try {
-        // console.log(typeof num);
         const key = await axios.get(`http://localhost:8080/razor/key`);
         const data = await axios.post(`http://localhost:8080/razor/payment`, {
           amount: Math.ceil(amount),
         });
-       
+
         let options = {
           key: key.data.key,
           amount: data.data.amount,
@@ -169,7 +161,9 @@ function Payment() {
             fontSize="26px"
             color={"blackAlpha.500"}
           >
-            {data.cartItems ? `Your Cart (${data.cartItems.length})` :`Your Cart (${0}))` }
+            {data.cartItems
+              ? `Your Cart (${data.cartItems.length})`
+              : `Your Cart (${0}))`}
           </Heading>
           <Text
             mt="15px"
@@ -204,8 +198,18 @@ function Payment() {
                     gap="2"
                   >
                     <Flex gap={5}>
-                      <Image className="imageFromPayment" h="180px" maxW={"180px"} src={el.productID.img1} />
-                      <Image className="imageFromPayment" h="180px" maxW={"180px"} src={el.productID.img2} />
+                      <Image
+                        className="imageFromPayment"
+                        h="180px"
+                        maxW={"180px"}
+                        src={el.productID.img1}
+                      />
+                      <Image
+                        className="imageFromPayment"
+                        h="180px"
+                        maxW={"180px"}
+                        src={el.productID.img2}
+                      />
                     </Flex>
                     <Box>
                       <Text
@@ -298,63 +302,116 @@ function Payment() {
         width={"40%"}
       >
         <Flex justifyContent={"space-around"}>
-        <Box h="180px" backgroundColor={"teal.100"} w="220px" borderRadius={"28px"} ml="20px" mt="20px" >
-          <Text fontSize={"24px"} color="teal.800"
-              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" >Total Payable Amount</Text>
+          <Box
+            h="180px"
+            backgroundColor={"teal.100"}
+            w="220px"
+            borderRadius={"28px"}
+            ml="20px"
+            mt="20px"
+          >
+            <Text
+              fontSize={"24px"}
+              color="teal.800"
+              fontFamily={"Ubuntu, sans-serif"}
+              textAlign="center"
+              mt="13px"
+            >
+              Total Payable Amount
+            </Text>
 
-              <Text fontSize={"24px"} color="teal.800"
-              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" > ₹ {data.totalPayment}</Text>
+            <Text
+              fontSize={"24px"}
+              color="teal.800"
+              fontFamily={"Ubuntu, sans-serif"}
+              textAlign="center"
+              mt="13px"
+            >
+              {" "}
+              ₹ {data.totalPayment}
+            </Text>
+          </Box>
 
-        </Box>
-
-        <Box h="180px" w="220px" backgroundColor={"blue.200"} borderRadius={"28px"} ml="20px" mt="20px">
-              <Text fontSize={"24px"} color="blue.800"
-              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" >Your Cart Items</Text>
-              <Text
-              fontSize={"24px"} color="blue.800"
-              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" 
-              >{data.cartItems ? data.cartItems.length : 0 } Products</Text>
-              <Text fontSize={"24px"} color="blue.800"
-              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="13px" >Added</Text>
-
-        </Box>
-
-
+          <Box
+            h="180px"
+            w="220px"
+            backgroundColor={"blue.200"}
+            borderRadius={"28px"}
+            ml="20px"
+            mt="20px"
+          >
+            <Text
+              fontSize={"24px"}
+              color="blue.800"
+              fontFamily={"Ubuntu, sans-serif"}
+              textAlign="center"
+              mt="13px"
+            >
+              Your Cart Items
+            </Text>
+            <Text
+              fontSize={"24px"}
+              color="blue.800"
+              fontFamily={"Ubuntu, sans-serif"}
+              textAlign="center"
+              mt="13px"
+            >
+              {data.cartItems ? data.cartItems.length : 0} Products
+            </Text>
+            <Text
+              fontSize={"24px"}
+              color="blue.800"
+              fontFamily={"Ubuntu, sans-serif"}
+              textAlign="center"
+              mt="13px"
+            >
+              Added
+            </Text>
+          </Box>
         </Flex>
 
-        <Heading fontSize={"24px"} color="blue.500"
-              fontFamily={"Ubuntu, sans-serif"} textAlign="center" mt="44px" >Choose Payment Method</Heading>
+        <Heading
+          fontSize={"24px"}
+          color="blue.500"
+          fontFamily={"Ubuntu, sans-serif"}
+          textAlign="center"
+          mt="44px"
+        >
+          Choose Payment Method
+        </Heading>
         <Box mt="30px">
+          <label className="rad-label">
+            <input
+              type="radio"
+              className="rad-input"
+              onChange={(e) => handleChange_1(e)}
+              value={checkedItems_1}
+              name="rad"
+            />
+            <div className="rad-design"></div>
+            <div className="rad-text">Pay on Delivery</div>
+          </label>
 
-        <label className="rad-label">
-          <input
-            type="radio"
-            className="rad-input"
-            onChange={(e) => handleChange_1(e)}
-            value={checkedItems_1}
-            name="rad"
-          />
-          <div className="rad-design"></div>
-          <div className="rad-text">Pay on Delivery</div>
-        </label>
-
-        <label className="rad-label">
-          <input
-            type="radio"
-            className="rad-input"
-            onChange={(e) => handleChange_2(e)}
-            value={checkedItems_2}
-            name="rad"
-          />
-          <div className="rad-design"></div>
-          <div className="rad-text">Razor Pay Online</div>
-        </label>
+          <label className="rad-label">
+            <input
+              type="radio"
+              className="rad-input"
+              onChange={(e) => handleChange_2(e)}
+              value={checkedItems_2}
+              name="rad"
+            />
+            <div className="rad-design"></div>
+            <div className="rad-text">Razor Pay Online</div>
+          </label>
         </Box>
         <Box textAlign={"center"} mt="20px">
-        <Button colorScheme={"green"} variant="solid" onClick={() => handlePayment(data.totalPayment)}>
-          PLACE ORDER
-        </Button>
-
+          <Button
+            colorScheme={"green"}
+            variant="solid"
+            onClick={() => handlePayment(data.totalPayment)}
+          >
+            PLACE ORDER
+          </Button>
         </Box>
       </Box>
     </>

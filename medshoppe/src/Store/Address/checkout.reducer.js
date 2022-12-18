@@ -1,7 +1,7 @@
 import { ADD_DETAILS } from "./checkout.types"
 
 const initState = {
-   data:{}
+   data: JSON.parse(localStorage.getItem("user_details")) || {},
 }
 export const addressReducer = (state=initState , {type,payload}) =>{
 
