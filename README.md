@@ -1,6 +1,6 @@
 # MEDSHOPPE
 
->The primary purpose of the medshoppe-website is to provide consumers with on-demand, home delivered access to a wide range of prescription, OTC pharmaceutical, other consumer healthcare products.You have to login first before adding any product to cart or buying any product, you will stay login until you press Sign-out button. You can filter the products according to your needs and also increase or decrease the quantity of the product you've added into your cart . Then , just place your order and it will be delivered to your address. So, please checkout our website.
+>The primary purpose of the medshoppe-website is to provide consumers with on-demand, home delivered access to a wide range of prescription, OTC pharmaceutical, other consumer healthcare products.You have to login first before adding any product to cart or buying any product, you will stay login until you press Sign-out button. All data which is shown in frontend is coming from the MongoDB Atlas Database and for handling the data and handle the orders made from the user, we've designed a admin website which will show us all the data in chart and graph form and we can add, delete or update the items from there. You can filter the products according to your needs and also increase or decrease the quantity of the product you've added into your cart. Then, make the payment according to your suitability , you can even make payment from razor pay testing cards. So, please checkout our website.
 
 ## Built With
 
@@ -57,11 +57,11 @@ Start the server
 
 
 ### Prerequisites
-React.js, React-Router-Dom, Axios, Redux, Nodejs, Express, Mongo DB, Api, Render, JWT, SMTP, Chakra UI.
+React.js, React-Router-Dom, Axios, Redux, Nodejs, Express, Mongo DB, Api, JWT, SMTP, Chakra UI.
 
 ### Setup
 VS code,
- GitHub, Mongo DB, Node-mailer, SMTP, Render,
+ GitHub, Mongo DB, SMTP, Razor Pay, Cyclic
 
 
 ## Authors
