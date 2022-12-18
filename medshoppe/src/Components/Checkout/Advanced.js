@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { ADD_DETAILS } from '../../Store/Address/checkout.types';
 // import { redis } from './config';
+// import { redis } from './config';
 export default function Advanced() {
   const initState = {
 
@@ -36,6 +37,7 @@ export default function Advanced() {
     else{
 
       dispatch({type:ADD_DETAILS,payload:details});
+      // console.log(redis);
       // redis.hset("userdetails","name" ,details.name,"phone",details.phone,"zip_code",details.zip_code,"city_name",details.city_name,"address",details.address)
       setDetails(initState);
       return navigate("/payment");

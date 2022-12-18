@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { redis } from "../Checkout/config";
+// import { redis } from "../Checkout/config";
 
 function PaymentSuccess() {
   const [state, setState] = useState(6);
@@ -25,7 +25,7 @@ function PaymentSuccess() {
   const ReferenceKey = searchQuery.get("reference");
 
   let user_data = useSelector((store) => store.auth.data);
-  let {data} = useSelector((store)=>store.address); 
+  // let {data} = useSelector((store)=>store.address); 
 
   useEffect(() => {
     countDown();
