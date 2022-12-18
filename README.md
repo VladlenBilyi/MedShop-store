@@ -5,22 +5,27 @@
 ## Built With
 
 - React.js
+- React-Chart
 - Redux
 - Node.js
 - Express
 - JWT
+- Razor Pay
+- Node-Mailer
 - SMTP
 - Mongo DB
-- Render
+- Cyclic
+- Bootstrap
 - Chakra UI
 
 ## Live Demo 
 
-[Netlify link available here]()
+[Netlify link available here](https://medshoppe.netlify.app/)
 
 ## Screenshots
 
-![App Screenshot]()
+![App Screenshot](https://i.ibb.co/pZry8Tz/Screenshot-128.png)
+![App Screenshot](https://i.ibb.co/fvxqdhv/Screenshot-129.png)
 
 
 ## Run Locally
