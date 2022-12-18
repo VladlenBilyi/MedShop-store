@@ -85,24 +85,24 @@ export const Productspage = () => {
     return (
         <>
            <Flex alignItems="center" padding="20px" justifyContent="space-between">
-           <Flex  onClick={onOpen} display={["block","block","flex","none"]} gap="20px" alignItems="center" fontWeight="bold" color="rgb(79, 88, 94)" fontSize={["20px","20px","30px","30px"]}  fontFamily="sans-serif"><BiFilterAlt fontSize="25px" color="#29e59c"/></Flex>
-            <SimpleGrid columns={[1,1,2,2]} gap={["20px","20px","100px","100px"]}>
-                        <Text fontWeight="bold" display={["none","none","none","block"]} color="rgb(79, 88, 94)" fontSize={["20px","20px","30px","30px"]} fontFamily="sans-serif">Mega Clearance Sale</Text>
-                        <Flex alignItems="center">
+           <Flex mt={["100px","50px","100px","100px"]} m={"auto"} onClick={onOpen} display={["block", "block", "flex", "none"]} gap="20px" alignItems="center" fontWeight="bold" color="rgb(79, 88, 94)" fontSize={["20px", "20px", "30px", "30px"]} fontFamily="sans-serif"><BiFilterAlt fontSize="25px" color="#29e59c" /></Flex>
+                <SimpleGrid mt={["50px","50px","50px","50px"]} m="auto" columns={[1, 1, 2, 2]} gap={["20px", "20px", "100px", "800px"]}>
+                    <Text fontWeight="bold" display={["none", "none", "none", "block"]} color="rgb(79, 88, 94)" fontSize={["20px", "20px", "30px", "30px"]} fontFamily="sans-serif">Mega Clearance Sale</Text>
+                    <Flex alignItems="center">
                         <InputGroup>
-    <InputLeftAddon children='Sort By:' />
-    <Select onChange={(event) => setSort(event.target.value)} border="2px" w="200px" >
-
-<option value="asc">Price low to high</option>
-<option value="desc">Price high to low</option>
-</Select>
-  </InputGroup>
-
-                          
-                           
-                        </Flex>
-
-                    </SimpleGrid>
+                            <InputLeftAddon children='Sort By:' />
+                            <Select onChange={(event) => setSort(event.target.value)} border="2px" w="200px" >
+ 
+                                <option value="asc">Price low to high</option>
+                                <option value="desc">Price high to low</option>
+                            </Select>
+                        </InputGroup>
+ 
+ 
+ 
+                    </Flex>
+ 
+                </SimpleGrid>
            </Flex>
             <Flex w="85%" m="auto"  gap={["20px","20px","50px","50px"]}  paddingTop="40px" paddingBottom="40px" >
                 <Box w={["10px","10px","10px","350px"]}>
@@ -215,6 +215,6 @@ export const Productspage = () => {
 
                 </Box>
             </Flex>
-        </>
-    )
+        </>
+    )
 }

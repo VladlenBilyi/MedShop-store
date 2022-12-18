@@ -95,8 +95,8 @@ function Payment() {
       return navigate("/paymentsuccess");
     } else if (checkedItems_2 === true) {
       try {
-        const key = await axios.get(`http://localhost:8080/razor/key`);
-        const data = await axios.post(`http://localhost:8080/razor/payment`, {
+        const key = await axios.get(`https://easy-tan-coyote-gown.cyclic.app/razor/key`);
+        const data = await axios.post(`https://easy-tan-coyote-gown.cyclic.app/razor/payment`, {
           amount: Math.ceil(amount),
         });
 
@@ -108,7 +108,7 @@ function Payment() {
           description: "Make People Happy",
           image: "https://i.ibb.co/s5mNPnz/1.png",
           order_id: data.data.id,
-          callback_url: `http://localhost:8080/razor/verification?email=${Email}&amount=${amount}`,
+          callback_url: `https://easy-tan-coyote-gown.cyclic.app/razor/verification?email=${Email}&amount=${amount}`,
           prefill: {
             name: user_data.username,
             email: "",

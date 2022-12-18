@@ -79,13 +79,13 @@ app.post("/verification", async (req, res) => {
         res.status(404).send(error);
       } else {
         res.redirect(
-          `http://localhost:3000/paymentsuccess?reference=${razorpay_payment_id}`
+          `https://medshoppe.netlify.app/paymentsuccess?reference=${razorpay_payment_id}`
         );
       }
     });
   } else {
     res.redirect(
-      `http://localhost:3000/paymentfailure`
+      `https://medshoppe.netlify.app/paymentfailure`
     );
   }
 });

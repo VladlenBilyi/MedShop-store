@@ -52,7 +52,7 @@ function PaymentSuccess() {
       
     };
     handleOrder();
-  }, [ReferenceKey,user_data.AccessToken]);
+  }, []);
 
   return (
     <Box>
