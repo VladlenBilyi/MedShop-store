@@ -14,6 +14,7 @@ import PaymentSuccess from "../Components/Payment/PaymentSuccess";
 import PaymentFailure from "../Components/Payment/PaymentFailure";
 import OrderMedicinesPage from "../Pages/OrderMedicines/OrderMedicinesPage";
 import PrivateRoute from "./PrivateRoute";
+import { OrdersPage } from "../Components/ordersPage";
 
 export const AllRoutes = () => {
   return (
@@ -64,6 +65,7 @@ export const AllRoutes = () => {
             </PrivateRoute>
           }
         />
+        <Route path="/order" element={<OrdersPage/>}></Route>
         <Route path="/category" element={<HealthcarePage />} />
         <Route path="/ordermedicine" element={<OrderMedicinesPage />} />
       </Routes>

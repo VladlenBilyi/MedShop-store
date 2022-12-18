@@ -22,10 +22,10 @@ const HomePage_Navbar = () => {
             <div>
                 <div className="sahil_home_nav_second-section">
                 <Link to="/category"><div>Navigate to</div></Link>
-                    <Link to="/catgeory"><div>Categories</div></Link>
+                    <Link to="/category"><div>Categories</div></Link>
                     <Link to="/"><div>Deals of the day</div></Link>
-                    <Link to="/catgeory"><div>Featured Brands</div></Link>
-                    <Link to="/catgeory"><div>Lab Tests by Concern</div></Link>
+                    <Link to="/category"><div>Featured Brands</div></Link>
+                    <Link to="/category"><div>Lab Tests by Concern</div></Link>
                 </div>
             </div>
         </section>
