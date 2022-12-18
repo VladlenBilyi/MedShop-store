@@ -86,7 +86,7 @@ import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
                        <Components.Input type='email' placeholder='Email' onChange={HandelChangeLogin} name='email' />
                        <Components.Input type='password' placeholder='Password' onChange={HandelChangeLogin} name='password'/>
                        <Components.Anchor href='#'>Forgot your password?</Components.Anchor>
-                       <Components.Button onClick={HandelSubmitForLogin}>Sigin In</Components.Button>
+                       <Components.Button onClick={HandelSubmitForLogin}>Sign In</Components.Button>
                    </Components.Form>
               </Components.SignInContainer>
               </Box>
@@ -111,7 +111,7 @@ import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
                             Enter Your personal details and start journey with us
                         </Components.Paragraph>
                             <Components.GhostButton onClick={()=>toggle(false)}>
-                                Sigin Up
+                                Sign Up
                             </Components.GhostButton> 
                       </Components.RightOverlayPanel>
   

@@ -10,11 +10,13 @@ let MEDSHOPPE=JSON.parse(localStorage.getItem('MEDSHOPPE'))||{
     username:"",
     email:""    
 }
-
-const Decoded_Email = jwt(MEDSHOPPE.AccessToken)
-
-if(Decoded_Email){
-    MEDSHOPPE.email = Decoded_Email.email
+if(MEDSHOPPE.AccessToken!==""){
+    
+    const Decoded_Email = jwt(MEDSHOPPE.AccessToken) || "";
+    
+    if(Decoded_Email){
+        MEDSHOPPE.email = Decoded_Email.email
+    }
 }
 
 if(!MEDSHOPPE.AccessToken){

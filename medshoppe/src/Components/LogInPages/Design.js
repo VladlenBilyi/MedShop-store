@@ -55,6 +55,8 @@
  export const Title = styled.h1`
  font-weight: bold;
  margin: 0;
+ font-size:24px;
+ color:purple;
  `;
  
  export const Input = styled.input`
@@ -71,7 +73,7 @@
     border: 1px solid #ff4b2b;
     background-color: #ff4b2b;
     color: #ffffff;
-    font-size: 12px;
+    font-size: 18px;
     font-weight: bold;
     padding: 12px 45px;
     letter-spacing: 1px;
@@ -86,7 +88,7 @@
  `;
  export const GhostButton = styled(Button)`
  background-color: transparent;
- border-color: #040404;
+ border-color: gray;
  `;
  
  export const Anchor = styled.a`
@@ -152,9 +154,9 @@ ${props => (props.signinIn !== true ? `transform: translateX(50%);` : null)}
  `;
 
  export const Paragraph = styled.p`
- font-size: 14px;
+ font-size: 21px;
    font-weight: 100;
-   line-height: 20px;
+   line-height: 30px;
    letter-spacing: 0.5px;
    margin: 20px 0 30px
  `;

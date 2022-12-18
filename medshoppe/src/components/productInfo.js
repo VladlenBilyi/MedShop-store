@@ -13,12 +13,12 @@ import {
 import { useEffect, useState } from "react";
 import { BiRupee } from "react-icons/bi";
 import { useSelector } from "react-redux";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { CarouselBox_Third } from "./SahilComponents/HomeComponents/CarouselBox_third";
 
 export const ProductInfo = () => {
-//   const { loading, data, token } = useSelector((store) => store.auth);
+  //   const { loading, data, token } = useSelector((store) => store.auth);
   const [data1, setData] = useState();
   const params = useParams();
   const toast = useToast();
@@ -36,27 +36,36 @@ export const ProductInfo = () => {
   let user_data = useSelector((store) => store.auth.data);
 
   const postProduct = () => {
-    try {
-      fetch("https://crimson-indri-sock.cyclic.app/cart/items", {
-        method: "POST",
-        body: JSON.stringify({ productID: id }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-          access_token: user_data.AccessToken,
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => console.log(json));
+    if (!user_data.AccessToken) {
       toast({
-        title: "1 Item added to Cart",
+        title: "You've to Login First",
 
-        status: "success",
+        status: "warning",
         duration: 2000,
       });
-    } catch (error) {
-      console.log(error);
+    } else {
+      try {
+        fetch("https://crimson-indri-sock.cyclic.app/cart/items", {
+          method: "POST",
+          body: JSON.stringify({ productID: id }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+            access_token: user_data.AccessToken,
+          },
+        })
+          .then((response) => response.json())
+          .then((json) => console.log(json));
+        toast({
+          title: "1 Item added to Cart",
+
+          status: "success",
+          duration: 2000,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      setAdded(true);
     }
-    setAdded(true);
     // console.log(token);
   };
 
@@ -166,7 +175,7 @@ export const ProductInfo = () => {
             </Text>
             <Link to={"/cart"}>
               <Button
-                disabled={Added == false}
+                disabled={Added === false}
                 _hover={{ bg: "rgb(149,149,100)" }}
                 w="100%"
                 color="white"

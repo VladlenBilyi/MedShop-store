@@ -13,6 +13,7 @@ function Payment() {
   const space = useRef(null);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
+  console.log(data);
 
   let user_data = useSelector((store)=>store.auth.data);
   let Email = useSelector((store)=>store.auth.email);
@@ -106,7 +107,7 @@ function Payment() {
         const data = await axios.post(`http://localhost:8080/razor/payment`, {
           amount: Math.ceil(amount),
         });
-        console.log(data);
+       
         let options = {
           key: key.data.key,
           amount: data.data.amount,
