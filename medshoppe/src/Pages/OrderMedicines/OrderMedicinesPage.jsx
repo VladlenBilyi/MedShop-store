@@ -1,5 +1,5 @@
 import React from 'react'
-import OrderMedicines from '../../components/SahilComponents/OrderMedicines/OrderMedicines'
+import OrderMedicines from '../../Components/SahilComponents/OrderMedicines/OrderMedicines'
 
 const OrderMedicinesPage = () => {
   return (

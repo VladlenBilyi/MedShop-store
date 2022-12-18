@@ -5,15 +5,16 @@ import Profile from "../pages/Profile";
 import Product from "../pages/product";
 import Login from "../pages/login";
 import SingleProduct from "../pages/singleProduct";
+import PrivateRoute from "../components/PrivateRoute";
 
 function AllRoutes(){
     return <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/product' element={<Product />}></Route>
-        <Route path='/order' element={<Order />}></Route>
-        <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/' element={<PrivateRoute><Home /></PrivateRoute>}></Route>
+        <Route path='/product' element={<PrivateRoute><Product /></PrivateRoute>}></Route>
+        <Route path='/order' element={<PrivateRoute><Order /></PrivateRoute>}></Route>
+        <Route path='/profile' element={<PrivateRoute><Profile /></PrivateRoute>}></Route>
         <Route path='/login' element={<Login />}></Route>
-        <Route path='/product/:id' element={<SingleProduct />}></Route>
+        <Route path='/product/:id' element={<PrivateRoute><SingleProduct /></PrivateRoute>}></Route>
     </Routes>
 }
 

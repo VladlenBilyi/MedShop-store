@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react'
-import { Home } from '../../components/SahilComponents/homePages/Home';
+import { Home } from '../../Components/SahilComponents/homePages/Home';
 
 const Homepage = () => {
   return (

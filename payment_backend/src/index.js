@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const PORT = process.env.PORT;
-// const connect = require("../config/db");
+const connect = require("../config/db");
 const razorRoute = require("../routes/razor.routes");
 app.use(cors());
 app.use(express.json());
@@ -15,7 +15,7 @@ app.get("/",(req,res)=>{
 })
 
 app.listen(PORT,async()=>{
-    // await connect();
+    await connect();
     console.log(`http://localhost:${PORT}`);
 })
 
