@@ -1,5 +1,5 @@
 import React from 'react'
-import { Healthcare } from '../../components/SahilComponents/Healthcare/Healthcare'
+import { Healthcare } from '../../Components/SahilComponents/Healthcare/Healthcare'
 
 const HealthcarePage = () => {
   return (
