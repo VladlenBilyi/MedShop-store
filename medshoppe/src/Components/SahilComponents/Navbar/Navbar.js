@@ -1,14 +1,26 @@
 import React from 'react'
-import { Box, Center, Flex, Image, Input, InputGroup, InputLeftAddon, InputRightAddon, Show, Text } from '@chakra-ui/react';
+import { Box, Center, Flex, Image, Input, InputGroup, InputLeftAddon, InputRightAddon, Show, Text,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem
+ } from '@chakra-ui/react';
 import { AiFillCaretDown, AiOutlineSearch } from 'react-icons/ai';
 import { TbDiscount2 } from 'react-icons/tb';
+import { BsChevronDown } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { BsCartFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import Navbardrawer from './Navbar_drawer';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutAPI } from '../../../Store/Auth/auth.action';
 const Navbar = () => {
     const navigate=useNavigate();
+        const dispatch=useDispatch();
+    const {data,isAuth}=useSelector((store)=>store.auth)
+
+
     return (
 
         <Box w={"100vw"} h={"9rem"} backgroundColor={"#10847e"} pl={"20"}  pos='sticky'  zIndex={"10"} >
@@ -53,13 +65,24 @@ const Navbar = () => {
                             </Center>
                         </Link>
 
-                        <Link to={"/login"}>
+                       {isAuth? <Menu >
+                        <MenuButton color={"white"} rightIcon={<BsChevronDown/>}>
+                        {data?.username}
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>{data?.username}</MenuItem>
+                            <MenuItem>{data?.email}</MenuItem>
+                            <MenuItem>Profile</MenuItem>
+                            <MenuItem onClick={()=>dispatch(logoutAPI())}>Loguot</MenuItem>
+                        </MenuList>
+                        </Menu> :<Link to={"/login"}>
                             <Center>
                                 <CgProfile color="white" fontSize={"20px"} />
                                 <Text fontSize={"lg"} color="white" w={"115px"}>Login/Signup</Text>
                             </Center>
                         </Link>
-                        <Link to={"/"}>
+                    }
+                        <Link to={"/cart"}>
                             <Center>
                                 <BsCartFill color="white" />
                                 <Text fontSize={"lg"} color="white" w={"40px"}>  Cart</Text>

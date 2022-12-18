@@ -1,25 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home_Styles/Shop_by_Categories.css";
-
-
+import { useDispatch } from "react-redux";
+import { AddCategories } from "../../../Store/products/products.action";
 const Shop_by_Categories = () => {
-    const [category,setCategory]=useState("");
-
+    const dispatch=useDispatch();
     const handalechange=(Category)=>{
-        setCategory(Category)
+        dispatch(AddCategories(Category))
     }
+
+    
     return (
         <div>
             <p className="p-tag_Categories_Brands">Shop by Categories</p>
             <div className="Home_Categories_Brands">
-                <Link to={`/product`}>
-                <div onClick={()=>handalechange("Pet Care")} className="Home_Categories_Brands_Item">
+                <Link onClick={()=>handalechange("Skin Care")} to={`/product`}>
+                <div  className="Home_Categories_Brands_Item">
                     <div>
-                        <img src="https://cdn01.pharmeasy.in/dam/discovery/categoryImages/b26fa52dd35339e1a4e00c47b04e12d0.jpg?f=jpg?dim=360x0" alt="" />
+                        <img src="https://cdn01.pharmeasy.in/dam/discovery/categoryImages/154dec0567b23244b7dcbf2158d39eee.png?f=png" alt="" />
                     </div>
                     <div>
-                        Pet Care
+                    Skin Care
                     </div>
                 </div>
                 </Link>
@@ -64,9 +65,9 @@ const Shop_by_Categories = () => {
                 </div>
                 </Link>
                 <Link to="/product">
-                <div onClick={()=>handalechange("Elderly Care")} className="Home_Categories_Brands_Item">
+                <div onClick={()=>handalechange("Ayurvedic Care")} className="Home_Categories_Brands_Item">
                     <div>
-                        <img src="https://cdn01.pharmeasy.in/dam/discovery/categoryImages/fa936f30b4563fc4abd187fb22fe5258.png?f=png?dim=360x0" alt="" />
+                        <img src="https://cdn01.pharmeasy.in/dam/discovery/categoryImages/ecad9a974e003fb987858b3ee81413c6.png?f=png" alt="" />
                     </div>
                     <div>
                         Elderly Care

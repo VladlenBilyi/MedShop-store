@@ -32,9 +32,13 @@ export const Productspage = () => {
     const [sort,setSort]=useState(sort1)
     const [value,setValue]=useState(value1)
     const [value2,setValue2]=useState("")
-    
+    const {categorie}=useSelector((store)=>store.products)
+
+
+
+
     const dispatch=useDispatch()
-    
+    console.log(categorie)
     useEffect(()=>{
         let [a,b]=value2.split(":")
         if(a=="h"){

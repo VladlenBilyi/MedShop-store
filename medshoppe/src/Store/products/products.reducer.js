@@ -1,9 +1,10 @@
-import { GET_PRODUCTS_ERROR, GET_PRODUCTS_LOADING, GET_PRODUCTS_SUCCESS } from "./products.types"
+import { GET_PRODUCTS_ERROR, GET_PRODUCTS_LOADING, GET_PRODUCTS_SUCCESS,SET_PRODUCTS_CATEGORIES } from "./products.types"
 
 let initialState={
     loading:false,
     error:false,
-    data:[]
+    data:[],
+    categorie:""
 }
 
 export const productsReducer=(state=initialState,{type,payload})=>{
@@ -27,6 +28,12 @@ export const productsReducer=(state=initialState,{type,payload})=>{
                 loading:false,
                 error:false,
                 data:payload
+            }
+        }
+        case SET_PRODUCTS_CATEGORIES:{
+            return {
+                ...state,
+                categorie:payload
             }
         }
         default:{
