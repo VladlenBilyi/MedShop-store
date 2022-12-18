@@ -9,7 +9,9 @@ import { AboutHealthcare } from "./AboutHealthcare";
 import { Achievement } from "./Achievement";
 import { DownLoadApp } from "./DownLoadApp";
 import HealthcareCarousel from "./HealthcareCarousel";
-// import Footer from "../Footer/Footer";
+import { useDispatch } from "react-redux";
+import { AddCategories } from "../../../Store/products/products.action";
+
 
 const categorydata=[{
     "id": 109,
@@ -142,7 +144,11 @@ const categorydata=[{
 
 const Healthcare=()=>{
     const navigate=useNavigate()
-    const [data,setData]=useState(categorydata)
+    const [data,setData]=useState(categorydata);
+    const dispatch=useDispatch();
+    const handalechange=(Category)=>{
+        dispatch(AddCategories(Category))
+    }
     return(
         <>
             <section className="Sahil" >
@@ -159,7 +165,7 @@ const Healthcare=()=>{
                         boxShadow='3px 0 8px 1px var(--chakra-colors-dark-background)'
                         paddingTop="10px" paddingBottom="10px" pr="4"
                         >
-                          <Link to={"/product"}>
+                          <Link onClick={()=>handalechange(ele.name)} to={"/product"}>
                         <SimpleGrid columns={3} spacing={5}>
                         
                             <Image src={ele.imageUrl} h="70px" w="80" paddingLeft="30px"></Image>
@@ -180,12 +186,14 @@ const Healthcare=()=>{
                       
                         paddingTop="10px" paddingBottom="10px"
                         >
-                        <SimpleGrid columns={3} spacing={5}>
+                          <Link onClick={()=>handalechange(ele.name)} to={"/product"}>
+                        <SimpleGrid  columns={3} spacing={5}>
                         
                             <Image src={ele.imageUrl}boxSize='80px' paddingLeft="20px"></Image>
                             <Text margin="auto" paddingTop={3}>{ele.name}</Text>
                             <Text margin="auto" paddingTop={3} color="#319795">{ele.discountText}</Text>
                         </SimpleGrid>
+                        </Link>
                         </Box>
                   
                 )
@@ -203,6 +211,7 @@ const Healthcare=()=>{
                        
                         paddingTop="10px" paddingBottom="10px"
                         >
+                          <Link onClick={()=>handalechange(ele.name)} to={"/product"}>
                         <SimpleGrid columns={3} spacing={5}>
                             <Box   marginLeft="2em"gap="auto">
                             <Image src={ele.imageUrl}boxSize={20} paddingLeft="10px"></Image>
@@ -213,6 +222,7 @@ const Healthcare=()=>{
                              </Box>
                             <Text paddingTop={5} marginLeft="1em" color="#319795">{ele.discountText}</Text>
                         </SimpleGrid>
+                        </Link>
                         </Box>
                   
                 )
@@ -230,6 +240,7 @@ const Healthcare=()=>{
                        
                         paddingTop="10px" paddingBottom="10px"
                         >
+                          <Link onClick={()=>handalechange(ele.name)} to={"/product"}>
                         <SimpleGrid columns={3} spacing={5}>
                             <Box   marginLeft="2em"gap="auto">
                             <Image src={ele.imageUrl}boxSize={20} paddingLeft="10px"></Image>
@@ -240,6 +251,7 @@ const Healthcare=()=>{
                              </Box>
                             <Text paddingTop={5} marginLeft="1em" color="#319795">{ele.discountText}</Text>
                         </SimpleGrid>
+                        </Link>
                         </Box>
                   
                 )

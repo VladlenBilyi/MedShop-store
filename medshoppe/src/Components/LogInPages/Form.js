@@ -1,5 +1,6 @@
  import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
  import * as Components from './Design';
  
@@ -22,7 +23,7 @@ import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
      const [signup , SetSignup] = React.useState(initialStateSignup);
      const {loading,data,token} = useSelector(store=>store.auth)
      const dispatch = useDispatch();
-
+    const navigate=useNavigate();
      const HandelChangeSignup =(e)=>{
          e.preventDefault();
          const {name,value}=e.target;
@@ -40,8 +41,7 @@ import { signinAPI, signupAPI } from "../../Store/Auth/auth.action";
      const HandelSubmitForLogin=(e)=>{
         e.preventDefault();
         dispatch(signinAPI(login)).then((res)=>{
-            
-            //console.log(res.data.token);    
+            navigate("/")      
         })
         
      }
