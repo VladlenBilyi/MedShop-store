@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Drawer,
   DrawerBody,
@@ -8,107 +8,139 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Button,
   Image,
   Box,
   Center,
   Flex,
   Text,
-  Divider,
   Menu,
-    MenuButton,
-    MenuList,
-    MenuItem
-} from '@chakra-ui/react';
-import { TbDiscount2 } from 'react-icons/tb';
-import { CgProfile} from 'react-icons/cg';
-import {BsCartFill,BsChevronDown} from 'react-icons/bs';
-import { AiOutlineMenu } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutAPI } from '../../../Store/Auth/auth.action';
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
+import { TbDiscount2 } from "react-icons/tb";
+import { CgProfile } from "react-icons/cg";
+import { BsCartFill } from "react-icons/bs";
+import { AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAPI } from "../../../Store/Auth/auth.action";
+
 function Navbardrawer() {
-  const dispatch=useDispatch();
-const {data,isAuth}=useSelector((store)=>store.auth)
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = React.useRef()
-  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const { data, isAuth, email } = useSelector((store) => store.auth);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = React.useRef();
   return (
     <>
-      <Box _hover={{ cursor: 'pointer' }}>
-        <AiOutlineMenu ref={btnRef} color="white" fontSize={"27px"} onClick={onOpen} />
+      <Box _hover={{ cursor: "pointer" }}>
+        <AiOutlineMenu
+          ref={btnRef}
+          color="white"
+          fontSize={"27px"}
+          onClick={onOpen}
+        />
       </Box>
       <Drawer
         isOpen={isOpen}
-        placement='right'
+        placement="right"
         onClose={onClose}
         size="full"
         finalFocusRef={btnRef}
-
       >
         <DrawerOverlay />
-        <DrawerContent background='#10847e'>
+        <DrawerContent background="#10847e">
           <DrawerCloseButton />
           <DrawerHeader>
             <Center>
               <Link to={"/"} onClick={onClose}>
-              <Box boxSize='90px' mt={"4"} >
-                <Image src='https://i.ibb.co/s5mNPnz/1.png' alt='logo' borderRadius={"50%"} />
-              </Box>
+                <Box boxSize="90px" mt={"4"}>
+                  <Image
+                    src="https://i.ibb.co/s5mNPnz/1.png"
+                    alt="logo"
+                    borderRadius={"50%"}
+                  />
+                </Box>
               </Link>
             </Center>
           </DrawerHeader>
 
           <DrawerBody>
-
-            <Flex flexDirection={"column"} justifyContent="center" alignItems={"center"} gap="2rem">
-              <Link to={"/ordermedicine"} onClick={onClose}><Text fontSize={"lg"} color="white" >Order Medicines</Text></Link>
-              <Link to={"/category"} onClick={onClose}><Text fontSize={"lg"} color="white" >Healthcare Products</Text></Link>
-              <Link to={"/"} onClick={onClose}><Text fontSize={"lg"} color="white" >Lab tests</Text></Link>
-              <Link to={"/"} onClick={onClose}><Text fontSize={"lg"} color="white" >RTPCR</Text></Link>
-
+            <Flex
+              flexDirection={"column"}
+              justifyContent="center"
+              alignItems={"center"}
+              gap="2rem"
+            >
+              <Link to={"/ordermedicine"} onClick={onClose}>
+                <Text fontSize={"lg"} color="white">
+                  Order Medicines
+                </Text>
+              </Link>
+              <Link to={"/category"} onClick={onClose}>
+                <Text fontSize={"lg"} color="white">
+                  Healthcare Products
+                </Text>
+              </Link>
+              <Link to={"/"} onClick={onClose}>
+                <Text fontSize={"lg"} color="white">
+                  Lab tests
+                </Text>
+              </Link>
+              <Link to={"/"} onClick={onClose}>
+                <Text fontSize={"lg"} color="white">
+                  RTPCR
+                </Text>
+              </Link>
 
               <Link onClick={onClose} to={"/"}>
                 <Flex alignItems={"center"} gap="5px">
                   <TbDiscount2 color="white" fontSize={"20px"} />
-                  <Text fontSize={"lg"} color="white" w={"55px"}>Offers </Text>
-                </Flex>              
-              </Link>
-
-              {isAuth? <Menu >
-                        <MenuButton color={"white"}>
-                        {data?.username}
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>{data?.username}</MenuItem>
-                            <MenuItem>{data?.email}</MenuItem>
-                            <MenuItem>Profile</MenuItem>
-                            <MenuItem onClick={()=>dispatch(logoutAPI())}>Loguot</MenuItem>
-                        </MenuList>
-                        </Menu>:
-
-              <Link onClick={onClose} to={"/login"}>
-                <Flex alignItems={"center"} gap="5px">
-                  <CgProfile color="white" fontSize={"20px"} />
-                  <Text fontSize={"lg"} color="white" w={"115px"}>Login/Signup</Text>
+                  <Text fontSize={"lg"} color="white" w={"55px"}>
+                    Offers{" "}
+                  </Text>
                 </Flex>
               </Link>
-           }
+
+              {isAuth ? (
+                <Menu>
+                  <MenuButton color={"white"}>{data?.username}</MenuButton>
+                  <MenuList>
+                    <MenuItem>{data?.username}</MenuItem>
+                    <MenuItem>{email}</MenuItem>
+                    <MenuItem>Profile</MenuItem>
+                    <MenuItem onClick={() => dispatch(logoutAPI())}>
+                      Loguot
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              ) : (
+                <Link onClick={onClose} to={"/login"}>
+                  <Flex alignItems={"center"} gap="5px">
+                    <CgProfile color="white" fontSize={"20px"} />
+                    <Text fontSize={"lg"} color="white" w={"115px"}>
+                      Login/Signup
+                    </Text>
+                  </Flex>
+                </Link>
+              )}
               <Link onClick={onClose} to={"/cart"}>
                 <Flex alignItems={"center"} gap="5px">
                   <BsCartFill color="white" />
-                  <Text fontSize={"lg"} color="white" w={"40px"}>  Cart</Text>
+                  <Text fontSize={"lg"} color="white" w={"40px"}>
+                    {" "}
+                    Cart
+                  </Text>
                 </Flex>
               </Link>
             </Flex>
           </DrawerBody>
-          <DrawerFooter>
-          </DrawerFooter>
+          <DrawerFooter></DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
-  )
+  );
 }
 
 export default Navbardrawer;
