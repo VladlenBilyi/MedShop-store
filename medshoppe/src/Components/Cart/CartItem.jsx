@@ -2,35 +2,71 @@ import { CloseButton, Flex, Link, Select, useColorModeValue } from '@chakra-ui/r
 import * as React from 'react'
 import { PriceTag } from './PriceTag'
 import { CartProductMeta } from './CartProductMeta'
+import { useState } from 'react'
+
+
+
 const QuantitySelect = (props) => {
+
+  const { onChange } = props;
+  const [counter, setCounter] = useState(props.value || 0);
+ 
+  //increase counter
+  const increase = () => {
+    setCounter(count => {
+      onChange(count + 1);
+      return count + 1;
+    });
+  };
+ 
+  //decrease counter
+const decrease = () => {
+  if (counter > 1) {
+    setCounter(count => {
+      onChange(count - 1);
+      return count - 1;
+    });
+  }
+};
+ 
   return (
-    <Select
-      maxW="64px"
-      aria-label="Select quantity"
-      focusBorderColor={useColorModeValue('blue.500', 'blue.200')}
-      {...props}
-    >
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </Select>
+    <div className="btn__container">
+        <button className="control__btn" onClick={increase.bind(this)}>+</button>
+        <span className="counter__output">{counter}</span>
+        <button className="control__btn" onClick={decrease.bind(this)}>-</button>
+        
+      </div>
+    // <Select
+    //   maxW="64px"
+    //   aria-label="Select quantity"
+    //   focusBorderColor={useColorModeValue('blue.500', 'blue.200')}
+    //   {...props}
+    // >
+    //   <option value="1">1</option>
+    //   <option value="2">2</option>
+    //   <option value="3">3</option>
+    //   <option value="4">4</option>
+    //   <option value="5">5</option>
+    // </Select>
   )
 }
 
 export const CartItem = (props) => {
   const {
-    isGiftWrapping,
-    name,
-    description,
-    quantity,
-    imageUrl,
-    currency,
-    price,
     onChangeQuantity,
     onClickDelete,
+    productID
   } = props
+
+  const [quantity, setQantity] = useState(props.quantity);
+
+  const quantityChange = (qty) => {
+    setQantity(qty);
+    if (!!onChangeQuantity) {
+      onChangeQuantity(qty);
+    }
+  }
+
   return (
     <Flex
       direction={{
@@ -41,10 +77,8 @@ export const CartItem = (props) => {
       align="center"
     >
       <CartProductMeta
-        name={name}
-        description={description}
-        image={imageUrl}
-        isGiftWrapping={isGiftWrapping}
+        name={productID.title}
+        image={productID.img1}
       />
 
       {/* Desktop */}
@@ -58,12 +92,10 @@ export const CartItem = (props) => {
       >
         <QuantitySelect
           value={quantity}
-          onChange={(e) => {
-            onChangeQuantity?.(+e.currentTarget.value)
-          }}
+          onChange={quantityChange.bind(this)}
         />
-        <PriceTag price={price} currency={currency} />
-        <CloseButton aria-label={`Delete ${name} from cart`} onClick={onClickDelete} />
+        <PriceTag price={quantity * productID.mrp} />
+        <CloseButton aria-label={`Delete ${productID.title} from cart`} onClick={onClickDelete?.bind(this)} />
       </Flex>
 
       {/* Mobile */}
@@ -82,11 +114,9 @@ export const CartItem = (props) => {
         </Link>
         <QuantitySelect
           value={quantity}
-          onChange={(e) => {
-            onChangeQuantity?.(+e.currentTarget.value)
-          }}
+          onChange={quantityChange.bind(this)}
         />
-        <PriceTag price={price} currency={currency} />
+        <PriceTag price={quantity * productID.mrp} />
       </Flex>
     </Flex>
   )

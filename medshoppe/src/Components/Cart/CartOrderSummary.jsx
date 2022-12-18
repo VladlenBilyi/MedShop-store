@@ -7,6 +7,7 @@ import {
   Text,
   useColorModeValue as mode,
 } from '@chakra-ui/react'
+import { Link as LinkAsRouter } from 'react-router-dom';
 import * as React from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 import { formatPrice } from './PriceTag'
@@ -22,13 +23,13 @@ const OrderSummaryItem = (props) => {
   )
 }
 
-export const CartOrderSummary = () => {
+export const CartOrderSummary = (props) => {
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full" borderColor="black">
       <Heading size="md">Order Summary</Heading>
 
       <Stack spacing="6">
-        <OrderSummaryItem label="Subtotal" value={formatPrice(1550)} />
+        <OrderSummaryItem label="Subtotal" value={formatPrice(props.totalPrice)} />
         <OrderSummaryItem label="Shipping + Tax">
           <Link href="#" textDecor="underline">
             Calculate shipping
@@ -44,13 +45,15 @@ export const CartOrderSummary = () => {
             Total
           </Text>
           <Text fontSize="xl" fontWeight="extrabold">
-            {formatPrice(1550)}
+            {formatPrice(props.totalPrice)}
           </Text>
         </Flex>
       </Stack>
-      <Button colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
-        Checkout
-      </Button>
+      <LinkAsRouter to="/checkout">
+        <Button style={{width: '100%'}}  colorScheme="blue" size="lg" fontSize="md" rightIcon={<FaArrowRight />}>
+          Checkout
+        </Button>
+      </LinkAsRouter>
     </Stack>
   )
 }

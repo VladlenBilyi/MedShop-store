@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Advanced.css';
 import { MDBAccordion, MDBAccordionItem, MDBBtn, MDBCard, MDBCardBody, MDBCardFooter, MDBCardHeader, MDBCardImage, MDBCheckbox, MDBCol, MDBContainer, MDBInput, MDBListGroup, MDBListGroupItem, MDBRow, MDBTextArea, MDBTypography } from 'mdb-react-ui-kit';
-
+import { useDisclosure } from '@chakra-ui/react';
+import { useSelector } from 'react-redux'
 export default function Advanced() {
+  const store = useSelector(store=>store.auth)
+  console.log(store.data.email);
+
+  let [totalPrice, setTotalPrice] = useState('0');
+  let [quantity, setQuantity] = useState('0');
+  useEffect(() => {
+    totalPrice = setTotalPrice(localStorage.getItem('totalPrice'));
+    quantity = setQuantity(localStorage.getItem('quantity'));
+  }, []);
   return (
     <MDBContainer className="my-5 py-5" style={{maxWidth: '1100px'}}>
       <section>
@@ -46,7 +56,7 @@ export default function Advanced() {
                 <p className="text-uppercase fw-bold mb-3 text-font">Email address</p>
                 <MDBRow>
                   <MDBCol md="4">
-                    <p>medshoppe@gmail.com</p>
+                    <p>{store.data.email}</p>
                   </MDBCol>
                   {/* <MDBCol md="7">
                     <MDBBtn outline color="dark" className="float-end button-color">Change</MDBBtn>
@@ -61,33 +71,34 @@ export default function Advanced() {
             <MDBCard className="mb-4">
               <MDBCardHeader className="py-3">
                 <MDBTypography tag="h5" className="mb-0 text-font">
-                  1 item <span className="float-end mt-1" style={{ fontSize: '13px' }}>Edit</span>
+                  {quantity} item
+                  {/* <span className="float-end mt-1" style={{ fontSize: '13px' }}>Edit</span> */}
                 </MDBTypography>
               </MDBCardHeader>
-              <MDBCardBody>
+              {/* <MDBCardBody>
                 <MDBRow>
                   <MDBCol md="4">
                     <MDBCardImage src="https://cdn01.pharmeasy.in/dam/products_otc/F12885/nestle-nangrow-nutritious-milk-drink-for-growing-children-creamy-vanilla-400g-2-1657181996.jpg?dim=700x0&dpr=1&q=100"
                       className="rounded-3" style={{ width: '100px' }} alt="Blue Jeans Jacket" />
                   </MDBCol>
                   <MDBCol md="6" className="ms-3">
-                    <span className="mb-0 text-price">Rs.350</span>
+                    <span className="mb-0 text-price">Rs.{totalPrice}</span>
                     <p className="mb-0 text-descriptions">NanGrow </p>
                     <p className="text-descriptions mt-0">
-                      Qty:<span className="text-descriptions fw-bold">1</span>
+                      Qty:<span className="text-descriptions fw-bold">{quantity}</span>
                     </p>
                   </MDBCol>
                 </MDBRow>
-              </MDBCardBody>
+              </MDBCardBody> */}
               <MDBCardFooter className="mt-4">
                 <MDBListGroup flush>
                   <MDBListGroupItem className="d-flex justify-content-between align-items-center border-0 px-0 pb-0 text-muted">
                     Subtotal
-                    <span>Rs.350</span>
+                    <span>Rs.{totalPrice}</span>
                   </MDBListGroupItem>
                   <MDBListGroupItem className="d-flex justify-content-between align-items-center px-0 fw-bold text-uppercase">
                     Total to pay
-                    <span>Rs.350</span>
+                    <span>Rs.{totalPrice}</span>
                   </MDBListGroupItem>
                 </MDBListGroup>
               </MDBCardFooter>
