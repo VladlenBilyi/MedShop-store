@@ -12,59 +12,59 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from "@chakra-ui/react";
-import Select from "react-select";
+// import Select from "react-select";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 
-const options = [
-  {
-    value: "Ecosprin 75mg Strip Of 14 Tablets",
-    v2: "Ayurvedic Care",
-    label: "Ecosprin 75mg Strip Of 14 Tablets",
-  },
-  // { value: 'Dolo 650mg Stip Of 15 Tablets',v2:"Fitness & Supplements", label: 'Dolo 650mg Stip Of 15 Tablets' },
-  {
-    value: "Evion 400mg Strip of 10 Capsules",
-    v2: "Health Food and Drinks",
-    label: "Evion 400mg Strip of 10 Capsules",
-  },
-  {
-    value: "Pan 40mg Strip of 15 Tablets",
-    v2: "Home Care",
-    label: "Pan 40mg Strip of 15 Tablets",
-  },
-  {
-    value: "Pharmeasy Multivitamin",
-    v2: "Beauty",
-    label: "Pharmeasy Multivitamin",
-  },
-  // { value: 'Dolo 650mg Stip Of 15 Tablets',v2:"Skin Care", label: 'Dolo 650mg Stip Of 15 Tablets' },
-  {
-    value: "Ecosprin 75mg Strip Of 14 Tablets",
-    v2: "Sexual Wellness",
-    label: "Ecosprin 75mg Strip Of 14 Tablets",
-  },
-  {
-    value: "Pharmeasy Multivitamin",
-    v2: "Personal Care",
-    label: "Pharmeasy Multivitamin",
-  },
-  {
-    value: "Ecosprin 75mg Strip Of 14 Tablets",
-    v2: "Skin Care",
-    label: "Ecosprin 75mg Strip Of 14 Tablets",
-  },
-  {
-    value: "Evion 400mg Strip of 10 Capsules",
-    v2: "Fitness & Supplements",
-    label: "Evion 400mg Strip of 10 Capsules",
-  },
-  {
-    value: "Pan 40mg Strip of 15 Tablets",
-    v2: "Home Care",
-    label: "Pan 40mg Strip of 15 Tablets",
-  },
-];
+// const options = [
+//   {
+//     value: "Ecosprin 75mg Strip Of 14 Tablets",
+//     v2: "Ayurvedic Care",
+//     label: "Ecosprin 75mg Strip Of 14 Tablets",
+//   },
+//   // { value: 'Dolo 650mg Stip Of 15 Tablets',v2:"Fitness & Supplements", label: 'Dolo 650mg Stip Of 15 Tablets' },
+//   {
+//     value: "Evion 400mg Strip of 10 Capsules",
+//     v2: "Health Food and Drinks",
+//     label: "Evion 400mg Strip of 10 Capsules",
+//   },
+//   {
+//     value: "Pan 40mg Strip of 15 Tablets",
+//     v2: "Home Care",
+//     label: "Pan 40mg Strip of 15 Tablets",
+//   },
+//   {
+//     value: "Pharmeasy Multivitamin",
+//     v2: "Beauty",
+//     label: "Pharmeasy Multivitamin",
+//   },
+//   // { value: 'Dolo 650mg Stip Of 15 Tablets',v2:"Skin Care", label: 'Dolo 650mg Stip Of 15 Tablets' },
+//   {
+//     value: "Ecosprin 75mg Strip Of 14 Tablets",
+//     v2: "Sexual Wellness",
+//     label: "Ecosprin 75mg Strip Of 14 Tablets",
+//   },
+//   {
+//     value: "Pharmeasy Multivitamin",
+//     v2: "Personal Care",
+//     label: "Pharmeasy Multivitamin",
+//   },
+//   {
+//     value: "Ecosprin 75mg Strip Of 14 Tablets",
+//     v2: "Skin Care",
+//     label: "Ecosprin 75mg Strip Of 14 Tablets",
+//   },
+//   {
+//     value: "Evion 400mg Strip of 10 Capsules",
+//     v2: "Fitness & Supplements",
+//     label: "Evion 400mg Strip of 10 Capsules",
+//   },
+//   {
+//     value: "Pan 40mg Strip of 15 Tablets",
+//     v2: "Home Care",
+//     label: "Pan 40mg Strip of 15 Tablets",
+//   },
+// ];
 
 function NextArrow(props) {
   const { className, style, onClick } = props;

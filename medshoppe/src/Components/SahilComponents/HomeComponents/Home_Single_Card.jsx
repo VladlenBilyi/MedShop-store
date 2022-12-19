@@ -1,5 +1,5 @@
 import "./Home_Styles/Home_Single_Card.css";
-import { useNavigate,Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const Home_Single_Card = ({...elem}) => {

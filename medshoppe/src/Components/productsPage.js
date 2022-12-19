@@ -1,6 +1,6 @@
-import { Box, Button, Checkbox, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Grid, GridItem, Image, Input, InputGroup, InputLeftAddon, InputRightElement, Radio, RadioGroup, Select, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react"
+import { Box, Button,  Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, Flex, GridItem, Image, InputGroup, InputLeftAddon, Radio, RadioGroup, Select, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react";
-import { BsSearch } from "react-icons/bs";
+// import { BsSearch } from "react-icons/bs";
 import { BiRupee } from "react-icons/bi"
 import {BiFilterAlt} from "react-icons/bi"
 import { useDispatch, useSelector } from "react-redux"
@@ -9,7 +9,7 @@ import getUrl from "./productQuery";
 import { Link, useSearchParams } from "react-router-dom"
 
 function getPageUrl(val) {
-    if (val <= 0 || val == undefined || val == null) {
+    if (val <= 0 || val === undefined || val === null) {
         val = 1;
     }
     val = Number(val)
@@ -44,11 +44,11 @@ export const Productspage = () => {
     console.log(categorie)
     useEffect(()=>{
         let [a,b]=value2.split(":")
-        if(a=="h"){
+        if(a==="h"){
            setHigh(+b)
            setLow(0)
         }
-        else if (a == "l") {
+        else if (a === "l") {
             setLow(+b)
             setHigh(0)
         }
@@ -208,7 +208,7 @@ export const Productspage = () => {
 
                     </SimpleGrid>
                     <Flex m="auto" w="200px" gap="10px">
-                        <Button disabled={page == 1} onClick={() => setPage(page - 1)}>{"<"} Prev</Button>
+                        <Button disabled={page === 1} onClick={() => setPage(page - 1)}>{"<"} Prev</Button>
                         <Button _hover="none" fontSize="20px" color="white" bg="teal">{page}</Button>
                         <Button onClick={() => setPage(page + 1)} disabled={page===6}>Next {">"}</Button>
                     </Flex>

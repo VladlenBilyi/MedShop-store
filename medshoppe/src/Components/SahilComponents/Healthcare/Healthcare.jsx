@@ -1,9 +1,9 @@
 import React from "react";
-import axios from "axios"
-import { Image, Stack, Text ,SimpleGrid,Box} from '@chakra-ui/react'
+// import axios from "axios"
+import { Image, Text ,SimpleGrid,Box} from '@chakra-ui/react'
 import { Link, useNavigate } from "react-router-dom";
 import "./css/HealthcareCarousel.css";
-import { useEffect,useState } from "react";
+import { useState } from "react";
 import MediaQuery from 'react-responsive'
 import { AboutHealthcare } from "./AboutHealthcare";
 import { Achievement } from "./Achievement";

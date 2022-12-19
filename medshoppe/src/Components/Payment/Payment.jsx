@@ -13,7 +13,7 @@ function Payment() {
   const space = useRef(null);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  console.log(data);
+  // console.log(data);
 
   let user_data = useSelector((store) => store.auth.data);
   let Email = useSelector((store) => store.auth.email);
