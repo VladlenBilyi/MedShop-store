@@ -66,7 +66,7 @@ const  Sidebar = ({isOpen,onOpen, onClose})=> {
              <Link className={currentPage == '/' ? 'current':'navLink'} to='/'><Flex alignItems='center' gap='20px' fontSize='20px'><AiOutlineHome fontSize='30px' color='orange' /><Text>Home</Text></Flex></Link>
              <Link className={currentPage == '/product' ? 'current':'navLink'} to='/product'><Flex alignItems='center' gap='20px' fontSize='20px'><AiOutlineProject fontSize='30px' color='orange' /><Text>Products</Text></Flex></Link>
              <Link className={currentPage == '/order' ? 'current':'navLink'} to='/order'><Flex alignItems='center' gap='20px' fontSize='20px'><BsBoxSeam fontSize='30px' color='orange' /><Text>Orders</Text></Flex></Link>
-             <Link className={currentPage == '/profile' ? 'current':'navLink'} to='/profile'><Flex alignItems='center' gap='20px' fontSize='20px'><CgProfile fontSize='30px' color='orange' /><Text>My Profile</Text></Flex></Link>
+             <Link className={currentPage == '/addproduct' ? 'current':'navLink'} to='/addproduct'><Flex alignItems='center' gap='20px' fontSize='20px'><AiOutlineProject fontSize='30px' color='orange' /><Text>Add Product</Text></Flex></Link>
              <Link className={currentPage == '/login' ? 'current':'navLink'} to='/login'>
                {
                   !isAuth?<Flex alignItems='center' gap='20px' fontSize='20px'>
@@ -85,15 +85,15 @@ const  Sidebar = ({isOpen,onOpen, onClose})=> {
             </Flex>
             <Box>
             <Flex className="otherPageLink" flexDirection='column' gap='15px'>
-             <Link className={currentPage == '/' ? 'current':'navLink'} to='/'><Flex alignItems='center' gap='20px' fontSize='20px'><AiOutlineHome fontSize='30px'  /><Text >Home</Text></Flex></Link>
-             <Link className={currentPage == '/product' ? 'current':'navLink'} to='/product'><Flex  alignItems='center' gap='20px' fontSize='20px'><AiOutlineProject fontSize='30px'   /><Text >Products</Text></Flex></Link>
-             <Link className={currentPage == '/order' ? 'current':'navLink'} to='/order'><Flex  alignItems='center' gap='20px' fontSize='20px'><BsBoxSeam fontSize='30px'   /><Text >Orders</Text></Flex></Link>
-             <Link className={currentPage == '/profile' ? 'current':'navLink'} to='/profile'><Flex  alignItems='center' gap='20px' fontSize='20px'><CgProfile fontSize='30px'   /><Text >My Profile</Text></Flex></Link>
+             <Link className={currentPage == '/' ? 'current':'navLink'} to='/'><Flex alignItems='center' gap='20px' fontSize='20px'><AiOutlineHome color='orange' fontSize='30px'  /><Text >Home</Text></Flex></Link>
+             <Link className={currentPage == '/product' ? 'current':'navLink'} to='/product'><Flex  alignItems='center' gap='20px' fontSize='20px'><AiOutlineProject color='orange' fontSize='30px'   /><Text >Products</Text></Flex></Link>
+             <Link className={currentPage == '/order' ? 'current':'navLink'} to='/order'><Flex  alignItems='center' gap='20px' fontSize='20px'><BsBoxSeam color='orange' fontSize='30px'   /><Text >Orders</Text></Flex></Link>
+             <Link className={currentPage == '/addproduct' ? 'current':'navLink'} to='/addproduct'><Flex  alignItems='center' gap='20px' fontSize='20px'><AiOutlineProject fontSize='30px' color='orange' /><Text >Add Product</Text></Flex></Link>
              <Link className={currentPage == '/login' ? 'current':'navLink'} to='/login'>
                 {
                   !isAuth?<Flex alignItems='center' gap='20px' fontSize='20px'>
-                  <BiLogIn fontSize='30px' /><Text>Login</Text></Flex>:<Flex onClick={handleLogout} alignItems='center' gap='20px' fontSize='20px'>
-                  <TbLogin fontSize='30px'/><Text>Logout</Text></Flex>
+                  <BiLogIn color='orange' fontSize='30px' /><Text>Login</Text></Flex>:<Flex onClick={handleLogout} alignItems='center' gap='20px' fontSize='20px'>
+                  <TbLogin color='orange' fontSize='30px'/><Text>Logout</Text></Flex>
                 }
               </Link>
              
