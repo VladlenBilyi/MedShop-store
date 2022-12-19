@@ -11,7 +11,6 @@
  min-height: 600px;
  margin: auto;
  `;
-
  export const SignUpContainer = styled.div`
   position: absolute;
   top: 0;

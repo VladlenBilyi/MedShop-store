@@ -1,14 +1,5 @@
 import { AUTH_ERROR, AUTH_LOADING, AUTH_LOGOUT, AUTH_SIGNIN_SUCCESS } from "./auth.types";
 import jwt from 'jwt-decode';
-let initState = {
-
-    loading: false,
-    error: false,
-    isAuth: false,
-    token: "",
-    data: "",
-    email:""
-}
 let MEDSHOPPE=JSON.parse(localStorage.getItem('MEDSHOPPE2'))||{
     AccessToken:"",
     RefreshToken:"",
@@ -18,31 +9,32 @@ let MEDSHOPPE=JSON.parse(localStorage.getItem('MEDSHOPPE2'))||{
 
 }
 
-
-if(MEDSHOPPE.AccessToken){
-    let verify = jwt(MEDSHOPPE.AccessToken);
-    if(verify){
-        initState.isAuth=true;
-        initState.token=MEDSHOPPE.AccessToken;
-        initState.data=verify;
-        initState.email=verify.email;
-    }
-    else{
+if(!MEDSHOPPE.AccessToken){
         let refreshData=fetch('https://crimson-indri-sock.cyclic.app/user/signin/verification',{
             method:'POST',
             headers:{access_token:MEDSHOPPE.AccessToken,refresh_token:MEDSHOPPE.RefreshToken}
             
         }).then((e)=>e.json()).then((e)=>MEDSHOPPE.AccessToken=e.AccessToken).catch((error)=>
         MEDSHOPPE.RefreshToken="",
-        initState.isAuth=false,
-        initState.AccessToken="",
-        initState.data="",
-        initState.email=""
+        MEDSHOPPE.AccessToken="",
+        MEDSHOPPE.userType="",
+        MEDSHOPPE.username="",
+        MEDSHOPPE.email=""
         )
 
     }
 
+let initState = {
+    loading: false,
+    error: false,
+    isAuth: MEDSHOPPE.AccessToken === ''?false:true,
+    token: MEDSHOPPE.AccessToken ,
+    data: {AccessToken :MEDSHOPPE.AccessToken , RefreshToken :MEDSHOPPE.RefreshToken , username : MEDSHOPPE.username , userType :MEDSHOPPE.userType , email : MEDSHOPPE.email },
+    email : ''
 }
+
+
+
 export const authReducer = (state = initState, action) => {
     switch (action.type) {
         case AUTH_LOADING: {

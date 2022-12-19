@@ -103,7 +103,7 @@ import * as Components from './Design';
       return(
          <>
          
-          <Components.Container>
+           <Components.Container>
               <Components.SignUpContainer signinIn={signIn}>
                   <Components.Form>
                       <Components.Title>Create Account</Components.Title>
