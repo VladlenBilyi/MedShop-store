@@ -1,13 +1,38 @@
 import { Box, Flex, Heading, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react";
 import Navbar from "../components/Navbar";
 import { Sidebar } from "../components/Sidebar";
-import { Cdata } from "../config/chart";
 import LineChart from "../components/chart.line";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import {GiCartwheel} from 'react-icons/gi'
 import {FaRupeeSign} from 'react-icons/fa'
 import PieChart from "../components/donutChart";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 function Home(){
+  const {data} = useSelector(store=>store.auth)
+  const [rev,setRev] = useState(0)
+  const [os,setOs] = useState(0)
+  const [op,setOp] = useState(0)
+  useEffect(()=>{
+    setRev(0);
+    setOs(0);
+    setOp(0);
+     const getData = async()=>{
+     let da = fetch('https://crimson-indri-sock.cyclic.app/order',{headers : {access_token : data.AccessToken}})
+     .then((er)=>er.json()).then((er)=>{
+      if(er.data.length !==0){
+        er.data.map((ele)=>{
+           setRev((prev)=>prev+ele.totalBill)
+           setOs((prev)=>prev+ele.orderData.length)
+           if(ele.delivered  == false){
+             setOp((prev)=>prev+1)
+           }
+        })
+      }
+     })
+    }
+     getData();
+  },[])
   const { isOpen,onOpen, onClose } = useDisclosure();
     return <Flex w='100%'>
              <Sidebar isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
@@ -25,9 +50,8 @@ function Home(){
                         </Box>
                         <Box>
                         <Text fontWeight='600' fontSize='20px' >Total Revenue</Text>
-                         <Text fontWeight='600' fontSize='20px'>1 lac</Text>
+                         <Text fontWeight='600' fontSize='20px'>{Math.ceil(rev)}</Text>
                         </Box>
-
                       </Flex>
                       
                     </Box>
@@ -39,8 +63,8 @@ function Home(){
                           </Flex>
                         </Box>
                         <Box>
-                        <Text fontWeight='600'  fontSize='20px'>Total Items Sale</Text>
-                         <Text fontWeight='600'fontSize='20px'>100 Product</Text>
+                        <Text fontWeight='600'  fontSize='20px'>Total Product Sale</Text>
+                         <Text fontWeight='600'fontSize='20px'>{os + op} Product</Text>
                         </Box>
 
                       </Flex>
@@ -55,21 +79,24 @@ function Home(){
                         </Box>
                         <Box>
                         <Text fontWeight='600'  fontSize='20px'>Total Order Pending</Text>
-                         <Text fontWeight='600' fontSize='20px'>50 Orders</Text>
+                         <Text fontWeight='600' fontSize='20px'>{op} Orders</Text>
                         </Box>
-
                       </Flex>
                       
                     </Box>
               </Flex>
 
              </Box>
-             <Box mt='50px'>
+             <Box mb='30px'><Text fontWeight='600' fontSize='20px'>Details Graph And Chart</Text></Box>
+             <Flex alignItems='center' justifyContent='space-between' w='90%' m='auto' flexDir={['column','column','column','row']}>
+             <Box w={['100%','100%','80%','40%']}>
                  <PieChart />
              </Box>
+              <Box w={['100%','100%','80%','60%']} >
+              <LineChart />
+              </Box>
+             </Flex>
               <Box>
-              <Text fontSize='30px' color='green' fontWeight='600'>Current Sale Chart</Text> 
-              <LineChart  chartData ={Cdata}/>
               </Box>
              </Box>
              </Box>
