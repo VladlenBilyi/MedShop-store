@@ -66,13 +66,13 @@ VS code,
 
 ## Authors
 
-👤 **Faizan Alam**
-
-- GitHub: [@Faizan7012](https://github.com/Faizan7012)
-
 👤 **Umang Arora**
 
 - GitHub: [@gucci1909](https://github.com/gucci1909)
+
+👤 **Faizan Alam**
+
+- GitHub: [@Faizan7012](https://github.com/Faizan7012)
 
 👤 **Sahil Laskar**
 
