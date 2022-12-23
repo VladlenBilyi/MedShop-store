@@ -41,7 +41,7 @@ export const Productspage = () => {
 
 
     const dispatch=useDispatch()
-    console.log(categorie)
+    // console.log(categorie)
     useEffect(()=>{
         let [a,b]=value2.split(":")
         if(a==="h"){

@@ -21,6 +21,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ADD_DETAILS } from "../../Store/Address/checkout.types";
+import { useEffect } from "react";
+import axios from "axios";
 export default function Advanced() {
   const initState = {
     name: "",
@@ -32,6 +34,8 @@ export default function Advanced() {
   const navigate = useNavigate();
   const [details, setDetails] = useState(initState);
   const dispatch = useDispatch();
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [quantity, setQuantity] = useState(0);
   const { data } = useSelector((store) => store.address);
   console.log(data);
 
@@ -50,14 +54,35 @@ export default function Advanced() {
       return;
     } else {
       dispatch({ type: ADD_DETAILS, payload: details });
-      localStorage.setItem("user_details",JSON.stringify(details));
+      localStorage.setItem("user_details", JSON.stringify(details));
       setDetails(initState);
       return navigate("/payment");
     }
   };
+  let user_data = useSelector((store) => store.auth.data);
 
-  const totalPrice = JSON.parse(localStorage.getItem("totalPrice")) || 0;
-  const quantity = JSON.parse(localStorage.getItem("quantity")) || 0;
+  const handleTotalPrice = async () => {
+    try {
+      const headers = {
+        access_token: user_data.AccessToken,
+      };
+      const res = await axios.get(
+        "https://crimson-indri-sock.cyclic.app/cart/items",
+        { headers }
+      );
+      setQuantity(res.data.cartItems.length);
+      setTotalPrice(res.data.totalPayment);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleTotalPrice();
+  }, []);
+
+  // const totalPrice = JSON.parse(localStorage.getItem("totalPrice")) || 0;
+  // const quantity = JSON.parse(localStorage.getItem("quantity")) || 0;
 
   return (
     <MDBContainer className="my-5 py-5" style={{ maxWidth: "1100px" }}>
@@ -114,11 +139,11 @@ export default function Advanced() {
                 <MDBListGroup flush>
                   <MDBListGroupItem className="d-flex justify-content-between align-items-center border-0 px-0 pb-0 text-muted">
                     Subtotal
-                    <span>Rs.{totalPrice}</span>
+                    <span>Rs.{Math.ceil(totalPrice)}</span>
                   </MDBListGroupItem>
                   <MDBListGroupItem className="d-flex justify-content-between align-items-center px-0 fw-bold text-uppercase">
                     Total to pay
-                    <span>Rs.{totalPrice}</span>
+                    <span>Rs.{Math.ceil(totalPrice)}</span>
                   </MDBListGroupItem>
                 </MDBListGroup>
               </MDBCardFooter>

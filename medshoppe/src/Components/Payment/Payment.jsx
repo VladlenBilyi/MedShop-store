@@ -231,7 +231,7 @@ function Payment() {
                     mr={{ lg: "100px" }}
                     color="teal"
                   >
-                    ₹ {el.productID.mrp}
+                    ₹ {Math.ceil(el.productID.mrp)}
                   </Text>
                 </Flex>
                 <Flex mt="20px" mb="40px">

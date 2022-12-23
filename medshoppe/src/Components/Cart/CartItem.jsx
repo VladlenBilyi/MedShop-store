@@ -1,58 +1,101 @@
-import { Button, CloseButton, Flex, Link, Select, Text, useColorModeValue } from '@chakra-ui/react'
-import * as React from 'react'
-import { PriceTag } from './PriceTag'
-import { CartProductMeta } from './CartProductMeta'
-import { useState } from 'react'
-import { AiOutlinePlus } from 'react-icons/ai'
-import { GrSubtract } from 'react-icons/gr'
+import {
+  Button,
+  CloseButton,
+  Flex,
+  Text
+} from "@chakra-ui/react";
+import * as React from "react";
+import { PriceTag } from "./PriceTag";
+import { CartProductMeta } from "./CartProductMeta";
+import { AiOutlinePlus } from "react-icons/ai";
+import { GrSubtract } from "react-icons/gr";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
+const QuantitySelect = ({ data }) => {
+  // console.log(props);
 
+  // const { onChange } = props;
+  // const [counter, setCounter] = useState(props.value || 0);
 
-const QuantitySelect = (props) => {
-
-  const { onChange } = props;
-  const [counter, setCounter] = useState(props.value || 0);
- 
   //increase counter
-  const increase = () => {
-    setCounter(count => {
-      onChange(count + 1);
-      return count + 1;
-    });
-  };
- 
+  // const increase = () => {
+  //   setCounter(count => {
+  //     onChange(count + 1);
+  //     return count + 1;
+  //   });
+  // };
+
   //decrease counter
-const decrease = () => {
-  if (counter > 1) {
-    setCounter(count => {
-      onChange(count - 1);
-      return count - 1;
-    });
-  }
-};
- 
+  // const decrease = () => {
+  //   if (counter > 1) {
+  //     setCounter(count => {
+  //       onChange(count - 1);
+  //       return count - 1;
+  //     });
+  //   }
+  // };
+
+  let user_data = useSelector((store) => store.auth.data);
+
+  const handleSubs = async (id) => {
+    try {
+      const headers = {
+        access_token: user_data.AccessToken,
+      };
+      const res = await axios.put(
+        "https://crimson-indri-sock.cyclic.app/cart/items",
+        { productID: id },
+        { headers }
+      );
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAdd = async (id) => {
+    try {
+      const headers = {
+        access_token: user_data.AccessToken,
+      };
+      const res = await axios.post(
+        "https://crimson-indri-sock.cyclic.app/cart/items",
+        { productID: id },
+        { headers }
+      );
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="btn__container">
-        <Flex gap={4} ml="15px">
-        <Button 
-         colorScheme={"red"}
-         variant="outline"
-        className="control__btn" disabled={counter===1} onClick={decrease.bind(this)}>
-
-        <GrSubtract />
+      <Flex gap={4} ml="15px">
+        <Button
+          colorScheme={"red"}
+          variant="outline"
+          className="control__btn"
+          onClick={() => handleSubs(data.productID._id)}
+          disabled={data.quantity === 1}
+        >
+          <GrSubtract />
         </Button>
-        <Text fontSize={"25px"} className="counter__output">{counter}</Text>
-       
-        <Button 
-         colorScheme={"green"}
-         variant="outline"
-        className="control__btn" onClick={increase.bind(this)}>
-        <AiOutlinePlus />
-        </Button>
+        <Text fontSize={"25px"} className="counter__output">
+          {data.quantity}
+        </Text>
 
-        </Flex>
-        
-      </div>
+        <Button
+          colorScheme={"green"}
+          variant="outline"
+          className="control__btn"
+          onClick={() => handleAdd(data.productID._id)}
+        >
+          <AiOutlinePlus />
+        </Button>
+      </Flex>
+    </div>
     // <Select
     //   maxW="64px"
     //   aria-label="Select quantity"
@@ -65,76 +108,83 @@ const decrease = () => {
     //   <option value="4">4</option>
     //   <option value="5">5</option>
     // </Select>
-  )
-}
+  );
+};
 
 export const CartItem = (props) => {
-  const {
-    onChangeQuantity,
-    onClickDelete,
-    productID
-  } = props
+  // console.log(props);
+  const { productID,quantity } = props;
+  let user_data = useSelector((store) => store.auth.data);
 
-  const [quantity, setQantity] = useState(props.quantity);
+  // const [quantity, setQantity] = useState(props.quantity);
 
-  const quantityChange = (qty) => {
-    setQantity(qty);
-    if (!!onChangeQuantity) {
-      onChangeQuantity(qty);
+  // const quantityChange = (qty) => {
+  //   setQantity(qty);
+  //   if (!!onChangeQuantity) {
+  //     onChangeQuantity(qty);
+  //   }
+  // };
+
+  const handleDelete = async(id)=>{
+    try {
+      const headers = {
+        access_token: user_data.AccessToken,
+      };
+      const res = await axios.delete(
+        `https://crimson-indri-sock.cyclic.app/cart/items/${id}`,
+        { headers }
+      );
+      return res
+    } catch (error) {
+      console.log(error);
     }
   }
 
   return (
     <Flex
       direction={{
-        base: 'column',
-        md: 'row',
+        base: "column",
+        md: "row",
       }}
       justify="space-between"
       align="center"
     >
-      <CartProductMeta
-        name={productID.title}
-        image={productID.img1}
-      />
+      <CartProductMeta name={productID.title} image={productID.img1} />
 
       {/* Desktop */}
       <Flex
         width="full"
         justify="space-between"
         display={{
-          base: 'none',
-          md: 'flex',
+          base: "none",
+          md: "flex",
         }}
       >
         <QuantitySelect
-          value={quantity}
-          onChange={quantityChange.bind(this)}
+          data={props}
+          // onChange={quantityChange.bind(this)}
         />
-        <PriceTag price={quantity * productID.mrp} />
-        <CloseButton aria-label={`Delete ${productID.title} from cart`} onClick={onClickDelete?.bind(this)} />
+        <PriceTag price={Math.ceil(quantity * productID.mrp)} />
+        <CloseButton onClick={()=>handleDelete(props._id)} aria-label={`Delete ${productID.title} from cart`} />
       </Flex>
 
       {/* Mobile */}
-      <Flex
+      {/* <Flex
         mt="4"
         align="center"
         width="full"
         justify="space-between"
         display={{
-          base: 'flex',
-          md: 'none',
+          base: "flex",
+          md: "none",
         }}
       >
         <Link fontSize="sm" textDecor="underline">
           Delete
         </Link>
-        <QuantitySelect
-          value={quantity}
-          onChange={quantityChange.bind(this)}
-        />
+        <QuantitySelect data={props} />
         <PriceTag price={quantity * productID.mrp} />
-      </Flex>
+      </Flex> */}
     </Flex>
-  )
-}
+  );
+};

@@ -21,6 +21,7 @@ export const AllRoutes = () => {
     <div>
       <Navbar />
       <Routes>
+        <Route path="/*" element={<Homepage/>} ></Route>
         <Route path="/" element={<Homepage />} />
         <Route path="/product" element={<Productspage />} />
         <Route path="/product/:id" element={<ProductInfo />} />
