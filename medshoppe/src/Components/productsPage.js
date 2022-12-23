@@ -66,6 +66,10 @@ export const Productspage = () => {
             limit: 20
         }
         if (value) {
+            if(value!=="All Categories"){
+                
+                setPage(1)
+            }
             paramsObject.category = value
         }
         if (low) {
@@ -210,7 +214,7 @@ export const Productspage = () => {
                     <Flex m="auto" w="200px" gap="10px">
                         <Button disabled={page === 1} onClick={() => setPage(page - 1)}>{"<"} Prev</Button>
                         <Button _hover="none" fontSize="20px" color="white" bg="teal">{page}</Button>
-                        <Button onClick={() => setPage(page + 1)} disabled={page===6}>Next {">"}</Button>
+                        <Button onClick={() => setPage(page + 1)} disabled={page===5}>Next {">"}</Button>
                     </Flex>
 
                 </Box>
