@@ -23,9 +23,14 @@
 [Netlify link available here](https://medshoppe.netlify.app/)
 
 ## Screenshots
-
+   ## Home Page
 ![App Screenshot](https://i.ibb.co/pZry8Tz/Screenshot-128.png)
+   ## Signin Page
+![App Screenshot](https://i.ibb.co/6WDBJgd/login-signup.png)
+   ## Products Page
 ![App Screenshot](https://i.ibb.co/fvxqdhv/Screenshot-129.png)
+   ## Admin Page
+![App Screenshot](https://i.ibb.co/ThzLV4k/admin-page.png)
 
 
 ## Run Locally
